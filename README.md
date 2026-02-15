@@ -1,80 +1,62 @@
 # CodeAron 🤖
 
-**CodeAron** adalah AI Coding Assistant berbasis CLI yang berjalan sepenuhnya secara lokal (offline) dan dioptimalkan khusus untuk **MacBook Pro Apple Silicon (M1-M4)**. Didesain dengan fokus utama pada pengembangan **Flutter** menggunakan pendekatan *Clean Architecture*.
+**CodeAron** adalah asisten coding berbasis AI yang berjalan 100% secara lokal di mesin Apple Silicon (M1-M4). Dirancang untuk menjadi partner diskusi yang cerdas, responsif, dan adaptif bagi para developer.
 
 ---
 
 ## ✨ Fitur Unggulan
 
-- 🏠 **100% Lokal & Privat:** Tidak ada kode yang dikirim ke cloud. Privasi data Anda terjamin sepenuhnya.
-- ⚡ **Optimasi Apple Silicon:** Menggunakan framework **MLX** dari Apple Research untuk performa maksimal pada Unified Memory M1/M2/M3/M4.
-- 🛠️ **Flutter & Clean Architecture Expert:** Memahami struktur layer (Domain, Data, Presentation) dan pola desain Flutter (BLoC, Provider, dsb).
-- 🛡️ **Safe-Transaction Engine:** Integrasi Git otomatis (GitGuard) yang membuat checkpoint sebelum melakukan perubahan kode, serta validasi otomatis menggunakan `dart analyze`.
-- 👁️ **Aron Vision:** Mampu menganalisis desain UI (JPG/PNG) dan memberikan saran implementasi kode (Fase pengembangan).
-- 🔄 **Smart Update & Reload:** Mendeteksi pembaruan dari GitHub dan mampu melakukan hot-restart aplikasi secara instan.
-- 🇮🇩 **Linguistic Engine:** Interaksi natural dalam Bahasa Indonesia yang profesional namun santai.
+- **🚀 Smart Intent Detection**: Aron merespon seketika untuk obrolan santai dan hanya menganalisis proyek saat mendeteksi niat coding (sangat cepat & efisien).
+- **🌊 Real-time Streaming**: Jawaban muncul kata demi kata secara instan, memberikan pengalaman interaksi yang hidup seperti `gemini-cli`.
+- **🧠 Conversational Memory**: Aron memiliki ingatan sesi, sehingga Anda bisa berdiskusi secara natural tanpa perlu mengulang konteks.
+- **📂 Adaptive Project Context**: Secara otomatis mendeteksi tipe proyek (Flutter, Python, Node.js) dan menganalisis file yang relevan secara cerdas.
+- **💾 Auto-Writing & Patching**: Aron tidak hanya memberi saran, tapi bisa membuat atau merubah file secara otomatis melalui instruksi chat.
+- **🔍 Typo-Tolerant Commands**: Mengenali dan menyarankan perintah yang benar jika Anda salah mengetik (misal: `/modle` -> `/model`).
+- **🔄 In-App Updater**: Perbarui CodeAron ke versi terbaru langsung dari terminal dengan perintah `/update`.
 
 ---
 
-## 🚀 Instalasi Cepat
+## 🛠️ Instalasi & Persiapan
 
 ### Prasyarat
-- macOS (Apple Silicon M1/M2/M3/M4)
-- Python 3.11+
-- Flutter SDK & Git
+- macOS dengan Apple Silicon (M1, M2, M3, M4).
+- Python 3.11+.
+- [MLX](https://github.com/ml-explore/mlx) installed.
 
-### Langkah Instalasi
-1. **Clone Repositori:**
+### Cara Menjalankan
+1. Clone repositori ini:
    ```bash
    git clone https://github.com/initHD3v/CodeAron.git
    cd CodeAron
    ```
-
-2. **Setup Environment:**
+2. Setup Virtual Environment:
    ```bash
-   python3 -m venv .venv
+   python -m venv .venv
    source .venv/bin/activate
+   pip install -r requirements.txt
    pip install -e .
    ```
-
-3. **Global Access (Opsional):**
-   Tambahkan fungsi berikut ke `.zshrc` Anda:
+3. Jalankan CodeAron:
    ```bash
-   aron() { PYTHONPATH=/path/to/CodeAron /path/to/CodeAron/.venv/bin/python /path/to/CodeAron/src/main.py "$@"; }
+   python src/main.py
    ```
 
 ---
 
-## 🎮 Cara Penggunaan
+## ⌨️ Perintah Tersedia
 
-Cukup ketik `aron` di terminal Anda di dalam direktori proyek Flutter mana pun.
-
-### Perintah Utama (Inside Chat):
-- `/model` : Mengelola model AI (Download/Switch).
-- `/update`: Menarik pembaruan terbaru dari GitHub.
-- `/reload`: Memuat ulang aplikasi menggunakan kode lokal terbaru.
-- `/quit`  : Keluar dari aplikasi.
-
----
-
-## 🏗️ Arsitektur Sistem
-
-CodeAron dibangun dengan modularitas tinggi:
-- **Core Orchestrator:** Mengelola transisi state mesin (DFA).
-- **Inference Engine:** Abstraksi pemrosesan LLM lokal berbasis MLX.
-- **Context Manager:** Mengambil data nyata proyek (File Tree & Pubspec) untuk analisis akurat.
-- **GitGuard:** Menjamin keamanan integritas kode proyek user.
+| Perintah | Deskripsi |
+| :--- | :--- |
+| `/model` | Kelola dan pilih model AI lokal. |
+| `/update` | Cek dan instal pembaruan dari GitHub secara otomatis. |
+| `/clear` | Bersihkan memori percakapan sesi saat ini. |
+| `/reload` | Muat ulang aplikasi dari kode lokal tanpa keluar. |
+| `/quit` | Keluar dari aplikasi. |
 
 ---
 
-## 🛠️ Roadmap Pengembangan
-- [x] **Fase 0-2:** Dasar Infrastruktur & Integrasi Intelligence (DeepSeek-Coder).
-- [x] **Fase 3:** Context & Memory dasar (Real Project Analysis).
-- [ ] **Fase 4:** Real Coding & Patching (Auto-writing files).
-- [ ] **Fase 5:** Vision Engine (Analisis Gambar).
-- [ ] **Fase 6:** Final Polishing & Localization.
+## 🎯 Visi Pengembangan
+CodeAron dikembangkan untuk membuktikan bahwa asisten coding yang kuat tidak harus bergantung pada cloud. Dengan memanfaatkan kekuatan chip Apple Silicon dan framework MLX, CodeAron menghadirkan privasi total dan kecepatan maksimal bagi developer.
 
 ---
-
-## 📄 Lisensi
-[TBD] - Dikembangkan oleh initHD3v & Aron.
+**v0.2.0** | Dibuat dengan ❤️ untuk komunitas Developer Indonesia.

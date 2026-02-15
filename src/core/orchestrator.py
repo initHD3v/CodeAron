@@ -8,9 +8,11 @@ from src.llm.hub import ModelHub
 from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
+from rich.live import Live
 import questionary
 import time
 import os
+import difflib
 
 from src.tools.updater import AronUpdater
 from src.tools.patcher import CodePatcher
@@ -22,6 +24,7 @@ class Orchestrator:
     def __init__(self):
         self.current_state: AronState = AronState.IDLE
         self.context: Dict[str, Any] = {}
+        self.chat_history: List[Dict[str, str]] = [] # Memori percakapan
         self.retry_count: int = 0
         self.max_retries: int = settings.MAX_RETRIES if hasattr(settings, "MAX_RETRIES") else 3
         
@@ -43,25 +46,50 @@ class Orchestrator:
         pattern = r'<file path="(.*?)">(.*?)</file>'
         matches = re.findall(pattern, ai_response, re.DOTALL)
         
-        for path, content in matches:
-            console.print(f"[bold green]💾 Aron menulis file:[/bold green] [cyan]{path}[/cyan]")
-            self.patcher.write_full_file(path.strip(), content.strip())
+        if matches:
+            console.print("\n[bold cyan]🛠️  Aron menerapkan perubahan file...[/bold cyan]")
+            for path, content in matches:
+                console.print(f"  [dim]→ Menulis:[/dim] [green]{path}[/green]")
+                self.patcher.write_full_file(path.strip(), content.strip())
 
     def interactive_session(self):
+        available_commands = ["/quit", "/clear", "/model", "/update", "/reload"]
+        
         while True:
             try:
-                # Tampilkan info model dan directory di bawah input (mirip gemini-cli)
+                # Tampilkan info model dan directory
                 model_display = os.path.basename(self.inference.model_path)
                 project_display = str(settings.CURRENT_PROJECT_DIR).replace(os.path.expanduser("~"), "~")
                 
-                console.print(f"[dim]AI: [italic cyan]{model_display}[/italic cyan] | Dir: [italic yellow]{project_display}[/italic yellow][/dim]")
+                # Header info yang lebih minimalis
+                console.print(f"\n[bold dim]╭─ AI: {model_display} | Proyek: {project_display}[/bold dim]")
                 
-                prompt = questionary.text("❯", qmark="").ask()
-                if prompt is None or prompt.strip() == "/quit":
-                    console.print("[dim]Sampai jumpa! 👋[/dim]")
+                prompt = questionary.text("╰─❯", qmark="").ask()
+                if prompt is None:
                     break
                 
                 cmd = prompt.strip()
+                
+                # Deteksi Typo untuk Perintah
+                if cmd.startswith("/") and cmd not in available_commands:
+                    matches = difflib.get_close_matches(cmd, available_commands, n=1, cutoff=0.6)
+                    if matches:
+                        suggestion = matches[0]
+                        console.print(f"[yellow]  Mungkin maksud Anda: [bold]{suggestion}[/bold]?[/yellow]")
+                        cmd = suggestion
+                    else:
+                        console.print(f"[red]  Perintah [bold]{cmd}[/bold] tidak dikenali.[/red]")
+                        continue
+
+                if cmd == "/quit":
+                    console.print("[dim]  Sampai jumpa! 👋[/dim]")
+                    break
+                
+                if cmd == "/clear":
+                    self.chat_history = []
+                    console.print("[bold yellow]  🧹 Memori percakapan telah dibersihkan.[/bold yellow]")
+                    continue
+
                 if cmd == "/model":
                     self.hub.display_hub()
                     continue
@@ -71,71 +99,113 @@ class Orchestrator:
                     continue
 
                 if cmd == "/reload":
-                    console.print("[bold yellow]🔄 Reloading CodeAron dari kode lokal...[/bold yellow]")
+                    console.print("[bold yellow]  🔄 Reloading CodeAron...[/bold yellow]")
                     import sys
                     os.execv(sys.executable, [sys.executable] + sys.argv)
                     continue
 
-                self.run_step(prompt)
+                if cmd:
+                    self.run_step(prompt)
             except KeyboardInterrupt:
                 break
 
+    def _get_history_context(self) -> str:
+        """Mengambil beberapa pesan terakhir untuk memori."""
+        context = ""
+        for msg in self.chat_history[-6:]: 
+            context += f"{msg['role']}: {msg['content']}\n"
+        return context
+
     def _get_project_context(self) -> str:
-        """Mengambil data nyata dari folder proyek untuk diberikan ke AI."""
+        """Mengambil data nyata dari folder proyek secara dinamis."""
         try:
             files = []
+            project_type = "Umum"
+            
             for root, dirs, filenames in os.walk(settings.CURRENT_PROJECT_DIR):
-                # Abaikan folder yang tidak perlu
-                dirs[:] = [d for d in dirs if d not in ['.git', '.dart_tool', 'build', '.venv', 'node_modules']]
+                dirs[:] = [d for d in dirs if d not in ['.git', '.dart_tool', 'build', '.venv', 'node_modules', '__pycache__']]
                 for f in filenames:
                     files.append(os.path.relpath(os.path.join(root, f), settings.CURRENT_PROJECT_DIR))
-                    if len(files) > 50: break # Batasi agar context tidak penuh
+                    # Deteksi tipe proyek
+                    if f == "pubspec.yaml": project_type = "Flutter/Dart"
+                    elif f == "package.json": project_type = "Node.js/Web"
+                    elif f == "requirements.txt" or f == "setup.py": project_type = "Python"
+                    
+                    if len(files) > 50: break
             
-            # Coba baca pubspec.yaml
-            pubspec_content = ""
-            pubspec_path = os.path.join(settings.CURRENT_PROJECT_DIR, "pubspec.yaml")
-            if os.path.exists(pubspec_path):
-                with open(pubspec_path, 'r') as f:
-                    pubspec_content = f.read()
-
-            return f"Struktur File:\n{files[:30]}\n\nIsi pubspec.yaml:\n{pubspec_content[:1000]}"
+            context = f"Tipe Proyek Terdeteksi: {project_type}\n"
+            context += f"Struktur File:\n{files[:30]}\n"
+            
+            # Tambahkan isi file penting jika ada
+            important_files = ["pubspec.yaml", "package.json", "requirements.txt", "README.md"]
+            for imp_file in important_files:
+                path = os.path.join(settings.CURRENT_PROJECT_DIR, imp_file)
+                if os.path.exists(path):
+                    with open(path, 'r') as f:
+                        content = f.read(500)
+                        context += f"\nIsi {imp_file}:\n{content}\n"
+            
+            return context
         except:
-            return "Gagal membaca konteks proyek."
+            return "Konteks proyek tidak tersedia."
 
     def run_step(self, user_input: str):
-        """Alur logika dengan Konteks Nyata."""
+        """Alur logika dengan Streaming, Memory, dan Smart Context."""
         try:
             self.transition_to(AronState.INITIALIZING)
             
-            with console.status("[bold cyan]Aron sedang menganalisis proyek...", spinner="dots"):
-                self.transition_to(AronState.PLANNING)
-                
-                project_info = self._get_project_context()
-                
-                system_prompt = (
-                    f"Kamu adalah CodeAron v{settings.VERSION}, asisten coding lokal yang cerdas. "
-                    "Tugasmu adalah membantu developer Flutter dengan memberikan solusi praktis. "
-                    "Jika kamu perlu membuat atau merubah file, gunakan format berikut:\n"
-                    '<file path="nama_file.ext">\nisi file di sini\n</file>\n\n'
-                    "Berikan penjelasan singkat tentang perubahan yang kamu buat. "
-                    "Gunakan Bahasa Indonesia yang profesional dan format Markdown."
-                )
-                
-                full_prompt = f"{system_prompt}\n\nDATA PROYEK:\n{project_info}\n\nUser: {user_input}\n\nAron:"
-                response = self.inference.generate(full_prompt)
-                
-            # Bersihkan sisa-sisa tag
-            clean_response = response.replace("<|tool▁calls▁begin|>", "").replace("<|tool▁call▁begin|>", "").split("<|")[0]
+            # Deteksi Coding Intent (Optimasi Kecepatan)
+            coding_keywords = ["buat", "tulis", "file", "code", "fungsi", "error", "dart", "flutter", "tambah", "ubah", "hapus", "proyek", "analisis", "tampilkan", "python", "fix"]
+            is_coding_query = any(word in user_input.lower() for word in coding_keywords) or len(user_input) > 50
             
-            # Ekstrak dan tulis file jika ada
+            project_info = ""
+            if is_coding_query:
+                with console.status("[bold cyan]Aron menganalisis proyek...", spinner="dots"):
+                    project_info = self._get_project_context()
+            
+            history = self._get_history_context()
+            
+            system_prompt = (
+                f"Kamu adalah CodeAron v{settings.VERSION}, asisten AI yang cerdas dan natural. "
+                "Bicaralah seperti manusia. Gunakan Bahasa Indonesia.\n\n"
+            )
+            
+            if project_info:
+                system_prompt += f"DATA PROYEK (Referensi Utama):\n{project_info}\n\n"
+            
+            system_prompt += (
+                "RIWAYAT PERCAKAPAN:\n"
+                f"{history}\n"
+                "TUGAS: Lanjutkan percakapan. Jika user hanya menyapa, balas dengan ramah dan singkat. "
+                "Jika user bertanya teknis, gunakan data proyek untuk membantu. "
+                "Gunakan format <file path=\"...\">isi</file> jika membuat file."
+            )
+            
+            full_prompt = f"{system_prompt}\n\nUser: {user_input}\n\nAron:"
+            
+            self.transition_to(AronState.PLANNING)
+            
+            # UI Streaming
+            console.print("\n[bold cyan]Aron:[/bold cyan]")
+            full_response = ""
+            
+            with Live(Markdown(""), refresh_per_second=12, console=console) as live:
+                for response in self.inference.generate_stream(full_prompt):
+                    full_response += response
+                    display_text = full_response.split("<|")[0].strip()
+                    live.update(Markdown(display_text))
+            
+            clean_response = full_response.split("<|")[0].strip()
+            
+            # Simpan ke history
+            self.chat_history.append({"role": "User", "content": user_input})
+            self.chat_history.append({"role": "Aron", "content": clean_response})
+            
+            # Ekstrak file
             self._extract_and_write_files(clean_response)
-            
-            console.print("\n" + "─" * console.width)
-            console.print(Markdown(clean_response.strip()))
-            console.print("─" * console.width + "\n")
             
             self.transition_to(AronState.IDLE)
             
         except Exception as e:
-            console.print(f"[bold red]❌ Terjadi Kesalahan:[/bold red] {str(e)}")
+            console.print(f"\n[bold red]❌ Kesalahan:[/bold red] {str(e)}")
             self.transition_to(AronState.ERROR)

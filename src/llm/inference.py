@@ -48,6 +48,30 @@ class InferenceEngine:
                 for fd in null_fds + save_fds:
                     os.close(fd)
 
+    def generate_stream(self, prompt: str, max_tokens: int = 2000):
+        """Menghasilkan respon secara streaming (kata demi kata)."""
+        if not self.model:
+            self.load_model()
+            
+        # Alihkan stderr untuk membungkam peringatan MLX
+        save_stderr = os.dup(2)
+        null_fd = os.open(os.devnull, os.O_RDWR)
+        try:
+            os.dup2(null_fd, 2)
+            
+            # Gunakan stream_generate untuk MLX
+            for response in mlx_lm.stream_generate(
+                self.model, 
+                self.tokenizer, 
+                prompt=prompt, 
+                max_tokens=max_tokens
+            ):
+                yield response.text
+        finally:
+            os.dup2(save_stderr, 2)
+            os.close(save_stderr)
+            os.close(null_fd)
+
     def generate(self, prompt: str, max_tokens: int = 2000) -> str:
         """Menghasilkan respon dari AI."""
         if not self.model:
