@@ -4,7 +4,7 @@ import os
 
 class Settings(BaseSettings):
     APP_NAME: str = "CodeAron"
-    VERSION: str = "0.1.0"
+    VERSION: str = "0.2.0"
     BASE_DIR: Path = Path(__file__).parent.parent.parent
     MODEL_DIR: Path = BASE_DIR / "models"
     DB_PATH: Path = BASE_DIR / "aron_memory.db"
