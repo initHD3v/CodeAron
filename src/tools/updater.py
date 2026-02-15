@@ -33,10 +33,19 @@ class AronUpdater:
             return
 
         try:
-            with console.status("[bold green]Menarik kode terbaru dari GitHub...", spinner="dots"):
+            with console.status("[bold green]Menarik kode terbaru dan menginstal dependensi...", spinner="dots"):
                 self.repo.remotes.origin.pull()
                 
-                # Re-install untuk memastikan entry points/dependencies diperbarui
+                # Install dependensi dari requirements.txt
+                req_path = os.path.join(settings.BASE_DIR, "requirements.txt")
+                if os.path.exists(req_path):
+                    subprocess.run(
+                        [sys.executable, "-m", "pip", "install", "-r", req_path],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL
+                    )
+
+                # Re-install untuk memastikan entry points diperbarui
                 subprocess.run(
                     [sys.executable, "-m", "pip", "install", "-e", str(settings.BASE_DIR)],
                     stdout=subprocess.DEVNULL,
