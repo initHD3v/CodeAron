@@ -8,3 +8,4 @@ tree-sitter
 tree-sitter-languages
 questionary
 sqlmodel
+Pillow
