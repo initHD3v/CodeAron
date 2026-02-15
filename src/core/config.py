@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     
     # MLX / LLM Settings
     DEFAULT_MODEL: str = "mlx-community/deepseek-coder-6.7b-instruct-4bit"
+    MAX_RETRIES: int = 3
     
     class Config:
         env_prefix = "ARON_"
