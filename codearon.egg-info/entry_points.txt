@@ -1,0 +1,2 @@
+[console_scripts]
+aron = src.main:app

@@ -6,49 +6,41 @@ from src.llm.hub import ModelHub
 from rich.console import Console
 from rich.panel import Panel
 
+from src.tools.updater import AronUpdater
+
 app = typer.Typer(name=settings.APP_NAME)
 console = Console()
 orchestrator = Orchestrator()
 hub = ModelHub()
+updater = AronUpdater()
 
 def display_banner():
     banner = """
-    ██████╗ ██████╗ ██████╗ ███████╗ █████╗ ██████╗  ██████╗ ███╗   ██╗
-   ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗████╗  ██║
-   ██║     ██║   ██║██║  ██║█████╗  ███████║██████╔╝██║   ██║██╔██╗ ██║
-   ██║     ██║   ██║██║  ██║██╔══╝  ██╔══██║██╔══██╗██║   ██║██║╚██╗██║
-   ╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║██║  ██║╚██████╔╝██║ ╚████║
-    ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+    [bold cyan]██████╗  ██████╗ ██████╗ ███████╗ █████╗ ██████╗  ██████╗ ███╗   ██╗[/bold cyan]
+    [bold cyan]██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗████╗  ██║[/bold cyan]
+    [bold cyan]██║     ██║   ██║██║  ██║█████╗  ███████║██████╔╝██║   ██║██╔██╗ ██║[/bold cyan]
+    [bold cyan]██║     ██║   ██║██║  ██║██╔══╝  ██╔══██║██╔══██╗██║   ██║██║╚██╗██║[/bold cyan]
+    [bold cyan]╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║██║  ██║╚██████╔╝██║ ╚████║[/bold cyan]
+    [bold cyan] ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝[/bold cyan]
     """
-    console.print(Panel(banner, subtitle=f"v{settings.VERSION} - Local Flutter AI Assistant", border_style="cyan"))
+    console.print(banner)
+    console.print(f"  [bold white]v{settings.VERSION}[/bold white] [dim]|[/dim] [italic cyan]Cerdas, Tangguh, dan Lokal — Your Flutter AI Assistant[/italic cyan]")
+    
+    # Cek Update
+    if updater.check_for_updates():
+        console.print(f"  [bold yellow]✨ Versi baru tersedia! Ketik [bold white]/update[/bold white] untuk memperbarui.[/bold yellow]")
+    else:
+        console.print(f"  [dim]Ketik [bold white]/model[/bold white] untuk kelola AI [dim]|[/dim] [bold white]/quit[/bold white] untuk keluar[/dim]\n")
 
 @app.callback(invoke_without_command=True)
 def main(ctx: typer.Context):
+    display_banner()
     if ctx.invoked_subcommand is None:
-        display_banner()
-        choice = questionary.select(
-            "Apa yang ingin Anda lakukan hari ini?",
-            choices=[
-                "💬 Chat dengan Aron",
-                "⚙️ Kelola Model (Hub)",
-                "ℹ️ Info Versi",
-                "🚪 Keluar"
-            ]
-        ).ask()
-        
-        if choice == "💬 Chat dengan Aron":
-            prompt = questionary.text("Masukkan perintah Anda:").ask()
-            if prompt: chat(prompt)
-        elif choice == "⚙️ Kelola Model (Hub)":
-            hub_list()
-        elif choice == "ℹ️ Info Versi":
-            version()
+        orchestrator.interactive_session()
 
 @app.command()
 def chat(prompt: str = typer.Argument(..., help="Perintah untuk Aron")):
-
     """Mulai percakapan dengan CodeAron"""
-    console.print(f"[bold cyan]CodeAron v{settings.VERSION}[/bold cyan] siap membantu.\n")
     orchestrator.run_step(prompt)
 
 @app.command()

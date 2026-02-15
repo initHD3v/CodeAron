@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 from pathlib import Path
+import os
 
 class Settings(BaseSettings):
     APP_NAME: str = "CodeAron"
@@ -7,6 +8,9 @@ class Settings(BaseSettings):
     BASE_DIR: Path = Path(__file__).parent.parent.parent
     MODEL_DIR: Path = BASE_DIR / "models"
     DB_PATH: Path = BASE_DIR / "aron_memory.db"
+    
+    # Deteksi folder tempat user menjalankan perintah
+    CURRENT_PROJECT_DIR: Path = Path(os.getcwd())
     
     # MLX / LLM Settings
     DEFAULT_MODEL: str = "mlx-community/deepseek-coder-6.7b-instruct-4bit"

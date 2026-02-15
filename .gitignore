@@ -1,0 +1,22 @@
+# Models (Large Files)
+models/
+*.mlmodel
+*.gguf
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment / DB
+.env
+aron_memory.db
+
+# macOS
+.DS_Store
+
+# Build
+build/
+dist/
+*.egg-info/

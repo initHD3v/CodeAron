@@ -1,0 +1,10 @@
+README.md
+setup.py
+codearon.egg-info/PKG-INFO
+codearon.egg-info/SOURCES.txt
+codearon.egg-info/dependency_links.txt
+codearon.egg-info/entry_points.txt
+codearon.egg-info/requires.txt
+codearon.egg-info/top_level.txt
+src/__init__.py
+src/main.py

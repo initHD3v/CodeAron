@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: codearon
+Version: 0.1.0
+Requires-Dist: mlx-lm
+Requires-Dist: typer[all]
+Requires-Dist: rich
+Requires-Dist: gitpython
+Requires-Dist: pydantic
+Requires-Dist: pydantic-settings
+Requires-Dist: tree-sitter
+Requires-Dist: tree-sitter-languages
+Requires-Dist: questionary
+Requires-Dist: sqlmodel
+Dynamic: requires-dist

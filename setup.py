@@ -12,7 +12,7 @@ setup(
         "pydantic",
         "pydantic-settings",
         "tree-sitter",
-        "tree-sitter-dart",
+        "tree-sitter-languages",
         "questionary",
         "sqlmodel",
     ],
