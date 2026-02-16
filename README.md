@@ -1,71 +1,89 @@
-# 🤖 CodeAron: Senior AI Architect 🚀
+<div align="center">
 
-[![Platform](https://img.shields.io/badge/Platform-macOS%20(Apple%20Silicon)-black?style=for-the-badge&logo=apple)](https://developer.apple.com/apple-silicon/)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python)](https://www.python.org/)
-[![MLX](https://img.shields.io/badge/Engine-MLX-orange?style=for-the-badge)](https://github.com/ml-explore/mlx)
+# 🤖 CodeAron
+### **The Proactive Senior AI Architect for Apple Silicon**
 
-**CodeAron** adalah asisten pengembang berbasis AI yang berjalan 100% secara lokal, dirancang khusus untuk ekosistem Apple Silicon. Berfungsi sebagai **Senior AI Architect** yang proaktif, Aron tidak hanya menjawab pertanyaan, tetapi mampu menganalisis arsitektur, membaca kode, dan melakukan perubahan file secara cerdas dan mandiri.
+<p align="center">
+  <img src="https://img.shields.io/badge/PLATFORM-macOS%20SILICON-000000?style=for-the-badge&logo=apple&logoColor=white" />
+  <img src="https://img.shields.io/badge/ENGINE-MLX%20LM-FF4B11?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/MODEL-DEEPSEEK--V2-0052FF?style=for-the-badge&logo=deepseek&logoColor=white" />
+</p>
+
+---
+
+**CodeAron** adalah asisten pengembang berbasis AI yang berjalan 100% secara lokal. Aron dirancang untuk menjadi **Senior Architect** mandiri yang memiliki integritas data tinggi, tidak pernah berhalusinasi, dan proaktif dalam menganalisis serta memodifikasi kode langsung di mesin Anda.
+
+[Fitur Utama](#-fitur-utama) • [Tech Stack](#-technology-stack) • [Instalasi](#-instalasi--persiapan) • [Arsitektur](#-arsitektur-sistem)
+
+</div>
+
+## 🚀 Fitur Utama (v0.2.1)
+
+### 🧠 **Senior Architect Persona**
+Aron bukan sekadar chatbot. Ia memiliki kepribadian profesional yang menggunakan prinsip **"Check Before Speak"**. Ia akan melakukan observasi struktur proyek (`ls`) dan membaca konten file (`cat`) secara otomatis sebelum memberikan opini teknis atau rekomendasi arsitektur.
+
+### 🛡️ **Anti-Hallucination Protocol**
+- **Blind Observation:** Aron menyadari ia "tuna netra" tanpa perintah shell. Ia diwajibkan melakukan validasi empiris pada setiap langkah.
+- **Deterministic Inference:** Menggunakan temperatur rendah (0.2) untuk akurasi teknis maksimal.
+- **Strict Stop Sequences:** Model akan berhenti seketika setelah memberikan perintah teknis untuk mencegah prediksi output yang salah.
+
+### 🌊 **Modern Terminal UX**
+- **IDE-Style Code Rendering:** Blok kode dengan *syntax highlighting* Monokai yang bersih.
+- **Live Performance Monitor:** Pantau penggunaan RAM dan CPU Apple Silicon Anda secara real-time di bilah status bawah yang elegan.
+- **Professional Layout:** Interface berbasis panel yang memisahkan konteks user dan asisten secara visual.
 
 ---
 
 ## 🛠️ Technology Stack
 
-CodeAron memanfaatkan teknologi mutakhir untuk performa maksimal di mesin lokal:
-
-- **Core Engine:** [MLX Framework](https://github.com/ml-explore/mlx) - Optimasi inferensi untuk Apple Unified Memory.
-- **LLM Model:** [DeepSeek-Coder-V2-Lite](https://huggingface.co/deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct) - Model coding state-of-the-art dengan efisiensi tinggi.
-- **Vector Database:** [Qdrant](https://qdrant.tech/) - Untuk Semantic Memory dan RAG (Retrieval-Augmented Generation).
-- **Terminal UI:** [Rich](https://github.com/Textualize/rich) & [Prompt Toolkit](https://github.com/prompt-toolkit/python-prompt-toolkit) - Antarmuka terminal yang modern dan interaktif.
-- **Static Analysis:** [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) - Untuk pemahaman struktur kode yang mendalam.
-
----
-
-## ✨ Fitur Utama (v0.2.1)
-
-### 🧠 Senior AI Persona
-Aron kini berbicara seperti Senior Developer profesional. Ia menggunakan prinsip **"Check Before Speak"**, memastikan setiap analisis didasarkan pada data asli dari direktori proyek Anda.
-
-### 🛡️ Anti-Hallucination Protocol
-Dengan suhu inferensi yang dioptimasi (0.2) dan SOP observasi wajib, Aron dilarang keras mengarang struktur folder atau isi file. Ia akan selalu mulai dengan `ls` dan `cat` sebelum memberikan kesimpulan.
-
-### 🌊 Modern Terminal UI
-- **Professional Chat Bubbles:** Pemisahan visual yang jelas antara User dan AI.
-- **Live Performance Monitoring:** Pantau penggunaan RAM dan CPU secara real-time di bilah status bawah.
-- **IDE-Like Code Rendering:** Penampilan kode dengan syntax highlighting profesional bertema Monokai.
+| Komponen | Teknologi | Deskripsi |
+| :--- | :--- | :--- |
+| **Inference Engine** | **MLX Framework** | Optimasi Unified Memory untuk kecepatan maksimal di Mac M1-M4. |
+| **Model** | **DeepSeek-Coder-V2** | Model coding paling efisien untuk tugas arsitektural lokal. |
+| **Memory** | **Qdrant & FastEmbed** | Semantic memory (RAG) untuk pemahaman konteks proyek jangka panjang. |
+| **Interface** | **Rich & Prompt Toolkit** | UI terminal modern dengan auto-completion dan real-time status. |
+| **Analysis** | **Tree-sitter** | Parsing kode untuk pemahaman struktur AST yang akurat. |
 
 ---
 
-## 🚀 Instalasi & Persiapan
+## 📂 Arsitektur Sistem
+
+```text
+CodeAron/
+├── 🧠 src/core/        # Orchestrator & Logic Center
+├── 🤖 src/llm/         # MLX Inference Engine
+├── 💾 src/memory/      # Vector Store & RAG Logic
+├── 🛠️ src/tools/       # File Patcher & Project Validator
+└── 🎨 src/ui/          # Modern UI Renderer
+```
+
+---
+
+## ⚡ Instalasi & Persiapan
 
 ### Prasyarat
-- macOS dengan Apple Silicon (M1, M2, M3, M4).
+- macOS dengan Apple Silicon (M-Series).
 - Python 3.11+.
 
-### Cara Menjalankan
-1. **Clone & Setup:**
-   ```bash
-   git clone https://github.com/initHD3v/CodeAron.git
-   cd CodeAron
-   python -m venv .venv
-   source .venv/bin/activate
-   pip install -r requirements.txt
-   pip install -e .
-   ```
-2. **Launch:**
-   ```bash
-   aron
-   ```
+### Quick Start
+```bash
+# Clone repository
+git clone https://github.com/initHD3v/CodeAron.git
+cd CodeAron
+
+# Setup environment
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -e .
+
+# Run CodeAron
+aron
+```
 
 ---
 
-## 📈 Status Pengembangan
-
-- [x] Migrasi ke MLX-LM v0.30+
-- [x] Redesain UI Profesional
-- [x] Implementasi Proactive Analysis SOP
-- [x] Perbaikan Bug Halusinasi & Stop Sequences
-- [ ] Integrasi Vision Engine (Upcoming)
-- [ ] Fitur Multi-Project Indexing (Upcoming)
-
----
-**v0.2.1** | Dibuat dengan ❤️ oleh [initHD3v](https://github.com/initHD3v) untuk komunitas Developer Indonesia.
+<div align="center">
+  <p><i>"Privasi Total, Performa Tanpa Batas."</i></p>
+  <sub><b>v0.2.1</b> | Dibuat dengan ❤️ untuk komunitas Developer Indonesia oleh <b>initHD3v</b></sub>
+</div>
