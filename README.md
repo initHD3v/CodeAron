@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🤖 CodeAron
-### **The Proactive Senior AI Architect for Apple Silicon**
+### **Teman Gotong Royong Ngoding, 100% Lokal di Apple Silicon**
 
 <p align="center">
   <img src="https://img.shields.io/badge/PLATFORM-macOS%20SILICON-000000?style=for-the-badge&logo=apple&logoColor=white" />
