@@ -83,6 +83,21 @@ aron
 
 ---
 
+<details>
+<summary><b>🏮 Filosofi Nama: Mengapa "Aron"?</b></summary>
+<br>
+
+Diambil dari kearifan lokal **Suku Karo**, ***Aron*** merujuk pada kelompok kerja tradisional yang berlandaskan semangat **Gotong Royong**. 
+
+Filosofi ini menjadi identitas inti CodeAron:
+- **Persatuan:** Kolaborasi harmonis antara pengembang dan AI dalam satu kelompok kerja.
+- **Kebersamaan:** Aron hadir bukan sebagai alat, melainkan rekan yang turun ke "ladang kode" untuk menanam logika dan memanen solusi secara bersama-sama.
+- **Solidaritas:** Mengedepankan prinsip timbal balik (*reciprocity*)—di mana ketajaman analitis AI mendukung visi kreatif manusia.
+
+**CodeAron** adalah jembatan antara nilai luhur tradisi dan kemajuan teknologi; membuktikan bahwa inovasi terbaik lahir dari semangat kebersamaan.
+
+</details>
+
 <div align="center">
   <p><i>"Privasi Total, Performa Tanpa Batas."</i></p>
   <sub><b>v0.2.1</b> | Dibuat dengan ❤️ untuk komunitas Developer Indonesia oleh <b>initHD3v</b></sub>
