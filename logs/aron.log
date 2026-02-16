@@ -1,0 +1,414 @@
+2026-02-16 13:23:17,138 - Orchestrator - INFO - Menerima input user: analisa projek ini...
+2026-02-16 13:23:17,138 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:23:36,257 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 19.12 detik.
+2026-02-16 13:26:03,187 - Orchestrator - INFO - Menerima input user: analisa projek ini...
+2026-02-16 13:26:03,188 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:26:21,064 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 17.88 detik.
+2026-02-16 13:27:01,674 - Orchestrator - INFO - Menerima input user: analisa lagi secara mendalam, dan berikan aku info...
+2026-02-16 13:27:01,674 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:27:18,427 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 16.75 detik.
+2026-02-16 13:27:59,281 - Orchestrator - INFO - Menerima input user: bagaimana agar kita tahu projek ini sudah siap unt...
+2026-02-16 13:27:59,281 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:28:15,129 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 15.85 detik.
+2026-02-16 13:28:32,026 - Orchestrator - INFO - Menerima input user: jika dilihat dari sisi code nya apakah sudah dapat...
+2026-02-16 13:28:32,026 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:28:47,880 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 15.85 detik.
+2026-02-16 13:29:14,759 - Orchestrator - INFO - Menerima input user: apakah kamu berpikir bahwa projek ini merupakan pr...
+2026-02-16 13:29:14,759 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:29:25,991 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 11.23 detik.
+2026-02-16 13:29:57,935 - Orchestrator - INFO - Menerima input user: bisa kamu jalakan app pada project ini?...
+2026-02-16 13:30:02,753 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 4.82 detik.
+2026-02-16 13:30:42,480 - Orchestrator - INFO - Menerima input user: bagaimana caranya agar kamu dapar menjalankan proj...
+2026-02-16 13:30:42,480 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:30:52,634 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 10.15 detik.
+2026-02-16 13:31:04,508 - Orchestrator - INFO - Menerima input user: aku ingin kamu yang menjalankan project ini...
+2026-02-16 13:31:04,508 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:31:13,109 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 8.60 detik.
+2026-02-16 13:32:28,087 - Orchestrator - INFO - Menerima input user: apakah codearon sudah cerdar dan dapat bersaing?...
+2026-02-16 13:32:28,087 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:32:36,524 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 8.44 detik.
+2026-02-16 13:34:19,813 - Orchestrator - INFO - Menerima input user: bisa buatkan folder di directory ini dengan nama t...
+2026-02-16 13:34:19,814 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:35:07,044 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 47.23 detik.
+2026-02-16 13:37:05,468 - Orchestrator - INFO - Menerima input user: coba jalankan aplikasi yang baru kamu buat...
+2026-02-16 13:37:05,470 - Orchestrator - INFO - Mendeteksi query teknis, mengumpulkan konteks proyek.
+2026-02-16 13:37:11,686 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 6.22 detik.
+2026-02-16 13:37:33,785 - Orchestrator - INFO - Menerima input user: baik, pindah ke directory testaron...
+2026-02-16 13:37:36,982 - Orchestrator - INFO - Langkah selesai dengan sukses dalam 3.20 detik.
+2026-02-16 14:04:44,563 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/qdrant/bge-small-en-v1.5-onnx-q "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:44,839 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q "HTTP/1.1 200 OK"
+2026-02-16 14:04:45,246 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/qdrant/bge-small-en-v1.5-onnx-q/tree/52398278842ec682c6f32300af41344b1c0b0bb2?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:45,525 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q/tree/52398278842ec682c6f32300af41344b1c0b0bb2?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-02-16 14:04:45,832 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/qdrant/bge-small-en-v1.5-onnx-q/revision/main "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,126 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q/revision/main "HTTP/1.1 200 OK"
+2026-02-16 14:04:46,452 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,601 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,617 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,620 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/model_optimized.onnx "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,621 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,820 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,862 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 200 OK"
+2026-02-16 14:04:46,879 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,890 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,900 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:04:46,902 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/model_optimized.onnx "HTTP/1.1 302 Found"
+2026-02-16 14:04:46,904 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 200 OK"
+2026-02-16 14:04:47,291 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 200 OK"
+2026-02-16 14:04:47,292 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-02-16 14:04:47,292 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-02-16 14:04:47,373 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 200 OK"
+2026-02-16 14:04:47,375 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-02-16 14:04:47,376 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-02-16 14:04:47,678 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q/xet-read-token/52398278842ec682c6f32300af41344b1c0b0bb2 "HTTP/1.1 200 OK"
+2026-02-16 14:05:36,735 - Orchestrator - INFO - Menerima sinyal interupsi (SIGINT). Menutup sesi dengan aman...
+2026-02-16 14:07:26,973 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/qdrant/bge-small-en-v1.5-onnx-q "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:27,264 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q "HTTP/1.1 200 OK"
+2026-02-16 14:07:27,610 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/qdrant/bge-small-en-v1.5-onnx-q/tree/52398278842ec682c6f32300af41344b1c0b0bb2?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:28,224 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q/tree/52398278842ec682c6f32300af41344b1c0b0bb2?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-02-16 14:07:28,579 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/qdrant/bge-small-en-v1.5-onnx-q/revision/main "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:28,864 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q/revision/main "HTTP/1.1 200 OK"
+2026-02-16 14:07:29,178 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/model_optimized.onnx "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:29,347 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:29,348 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:29,362 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:29,368 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:29,490 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/model_optimized.onnx "HTTP/1.1 302 Found"
+2026-02-16 14:07:29,639 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:29,640 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-02-16 14:07:29,644 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:29,654 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:29,664 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:07:29,702 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-02-16 14:07:29,706 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-02-16 14:07:29,712 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 200 OK"
+2026-02-16 14:07:29,730 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 200 OK"
+2026-02-16 14:07:29,756 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-02-16 14:07:29,757 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-02-16 14:07:29,761 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 200 OK"
+2026-02-16 14:07:29,772 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q/xet-read-token/52398278842ec682c6f32300af41344b1c0b0bb2 "HTTP/1.1 200 OK"
+2026-02-16 14:07:29,804 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 200 OK"
+2026-02-16 14:07:54,244 - VectorStore - INFO - Membuat koleksi vektor baru: code_symbols
+2026-02-16 14:18:39,708 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:18:39,769 - Orchestrator - ERROR - Terjadi kesalahan fatal di Agentic Loop: [Errno 2] No such file or directory: '/Users/initialh/Projects/CodeAron/models/embeddings/config.json'
+Traceback (most recent call last):
+  File "/Users/initialh/Projects/CodeAron/src/core/orchestrator.py", line 336, in run_step
+    final_response = self._stream_and_clean_response(full_prompt)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/initialh/Projects/CodeAron/src/core/orchestrator.py", line 404, in _stream_and_clean_response
+    for response in self.inference.generate_stream(full_prompt, max_tokens=2500):
+  File "/Users/initialh/Projects/CodeAron/src/llm/inference.py", line 67, in generate_stream
+    self.load_model()
+  File "/Users/initialh/Projects/CodeAron/src/llm/inference.py", line 54, in load_model
+    raise e
+  File "/Users/initialh/Projects/CodeAron/src/llm/inference.py", line 50, in load_model
+    self.model, self.tokenizer = mlx_lm.load(self.model_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/initialh/Projects/CodeAron/.venv/lib/python3.11/site-packages/mlx_lm/utils.py", line 478, in load
+    model, config = load_model(model_path, lazy, model_config=model_config)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/initialh/Projects/CodeAron/.venv/lib/python3.11/site-packages/mlx_lm/utils.py", line 299, in load_model
+    config = load_config(model_path)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/initialh/Projects/CodeAron/.venv/lib/python3.11/site-packages/mlx_lm/utils.py", line 251, in load_config
+    with open(model_path / "config.json", "r") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/initialh/Projects/CodeAron/models/embeddings/config.json'
+2026-02-16 14:21:07,321 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:21:07,380 - Orchestrator - ERROR - Terjadi kesalahan fatal di Agentic Loop: [Errno 2] No such file or directory: '/Users/initialh/Projects/CodeAron/models/embeddings/config.json'
+Traceback (most recent call last):
+  File "/Users/initialh/Projects/CodeAron/src/core/orchestrator.py", line 336, in run_step
+    final_response = self._stream_and_clean_response(full_prompt)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/initialh/Projects/CodeAron/src/core/orchestrator.py", line 404, in _stream_and_clean_response
+    for response in self.inference.generate_stream(full_prompt, max_tokens=2500):
+  File "/Users/initialh/Projects/CodeAron/src/llm/inference.py", line 67, in generate_stream
+    self.load_model()
+  File "/Users/initialh/Projects/CodeAron/src/llm/inference.py", line 54, in load_model
+    raise e
+  File "/Users/initialh/Projects/CodeAron/src/llm/inference.py", line 50, in load_model
+    self.model, self.tokenizer = mlx_lm.load(self.model_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/initialh/Projects/CodeAron/.venv/lib/python3.11/site-packages/mlx_lm/utils.py", line 478, in load
+    model, config = load_model(model_path, lazy, model_config=model_config)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/initialh/Projects/CodeAron/.venv/lib/python3.11/site-packages/mlx_lm/utils.py", line 299, in load_model
+    config = load_config(model_path)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/initialh/Projects/CodeAron/.venv/lib/python3.11/site-packages/mlx_lm/utils.py", line 251, in load_config
+    with open(model_path / "config.json", "r") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/initialh/Projects/CodeAron/models/embeddings/config.json'
+2026-02-16 14:22:39,990 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/qdrant/bge-small-en-v1.5-onnx-q "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:40,306 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q "HTTP/1.1 200 OK"
+2026-02-16 14:22:41,219 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/qdrant/bge-small-en-v1.5-onnx-q/tree/52398278842ec682c6f32300af41344b1c0b0bb2?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:41,526 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q/tree/52398278842ec682c6f32300af41344b1c0b0bb2?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-02-16 14:22:42,141 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/qdrant/bge-small-en-v1.5-onnx-q/revision/main "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:42,755 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q/revision/main "HTTP/1.1 200 OK"
+2026-02-16 14:22:43,071 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/model_optimized.onnx "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:43,177 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:43,178 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:43,187 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:43,187 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/qdrant/bge-small-en-v1.5-onnx-q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:43,371 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/model_optimized.onnx "HTTP/1.1 302 Found"
+2026-02-16 14:22:43,450 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:43,456 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:43,456 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-02-16 14:22:43,468 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:43,468 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/Qdrant/bge-small-en-v1.5-onnx-Q/resolve/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 307 Temporary Redirect"
+2026-02-16 14:22:43,500 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-02-16 14:22:43,504 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 200 OK"
+2026-02-16 14:22:43,519 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-02-16 14:22:43,522 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 200 OK"
+2026-02-16 14:22:43,548 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-02-16 14:22:43,561 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/tokenizer.json "HTTP/1.1 200 OK"
+2026-02-16 14:22:43,579 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/config.json "HTTP/1.1 200 OK"
+2026-02-16 14:22:43,580 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/resolve-cache/models/Qdrant/bge-small-en-v1.5-onnx-Q/52398278842ec682c6f32300af41344b1c0b0bb2/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-02-16 14:22:43,697 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/Qdrant/bge-small-en-v1.5-onnx-Q/xet-read-token/52398278842ec682c6f32300af41344b1c0b0bb2 "HTTP/1.1 200 OK"
+2026-02-16 14:23:20,978 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:23:29,565 - Orchestrator - INFO - Agentic Loop selesai dalam 8.59 detik (1 loop).
+2026-02-16 14:24:03,514 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:24:06,150 - Orchestrator - INFO - Agentic Loop selesai dalam 2.64 detik (1 loop).
+2026-02-16 14:30:07,551 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:30:07,559 - VectorStore - ERROR - Pencarian vektor gagal: 'QdrantClient' object has no attribute 'search'
+2026-02-16 14:30:12,782 - Orchestrator - INFO - Agentic Loop selesai dalam 5.23 detik (1 loop).
+2026-02-16 14:30:23,056 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:30:23,104 - VectorStore - ERROR - Pencarian vektor gagal: 'QdrantClient' object has no attribute 'search'
+2026-02-16 14:30:38,293 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:30:38,294 - Orchestrator - INFO - Validasi sukses, Agentic Loop selesai.
+2026-02-16 14:30:38,294 - Orchestrator - INFO - Agentic Loop selesai dalam 15.24 detik (1 loop).
+2026-02-16 14:33:10,839 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:35:29,816 - Orchestrator - INFO - Agentic Loop selesai dalam 138.98 detik (1 loop).
+2026-02-16 14:35:39,144 - Orchestrator - INFO - Shutdown dimulai: Reloading CodeAron...
+2026-02-16 14:35:39,146 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 14:35:39,199 - Orchestrator - INFO - Shutdown selesai.
+2026-02-16 14:35:47,577 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:35:52,751 - Orchestrator - INFO - Agentic Loop selesai dalam 5.17 detik (1 loop).
+2026-02-16 14:36:07,043 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:36:08,117 - Orchestrator - INFO - Agentic Loop selesai dalam 1.07 detik (1 loop).
+2026-02-16 14:37:49,674 - Orchestrator - INFO - Shutdown dimulai: Reloading CodeAron...
+2026-02-16 14:37:49,676 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 14:37:49,726 - Orchestrator - INFO - Shutdown selesai.
+2026-02-16 14:37:56,680 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:38:02,213 - Orchestrator - INFO - Agentic Loop selesai dalam 5.53 detik (1 loop).
+2026-02-16 14:38:17,794 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:38:23,665 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:38:23,666 - Orchestrator - INFO - Agentic Loop selesai dalam 5.87 detik (1 loop).
+2026-02-16 14:38:50,952 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:38:56,691 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:38:56,693 - Orchestrator - INFO - Agentic Loop selesai dalam 5.74 detik (1 loop).
+2026-02-16 14:40:36,958 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:40:57,627 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:40:57,628 - Orchestrator - INFO - Memulai Agentic Loop ke-2
+2026-02-16 14:41:15,286 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:41:15,286 - Orchestrator - INFO - Agentic Loop selesai dalam 38.33 detik (2 loop).
+2026-02-16 14:41:35,662 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:41:40,241 - Orchestrator - WARNING - AI memberikan perintah tanpa tag <shell>. Memicu loop perbaikan.
+2026-02-16 14:41:40,242 - Orchestrator - INFO - Memulai Agentic Loop ke-2
+2026-02-16 14:41:45,762 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:41:45,763 - Orchestrator - INFO - Agentic Loop selesai dalam 10.10 detik (2 loop).
+2026-02-16 14:42:13,592 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:42:27,944 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:42:27,946 - Orchestrator - INFO - Agentic Loop selesai dalam 14.35 detik (1 loop).
+2026-02-16 14:42:36,193 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:42:54,658 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:42:54,659 - Orchestrator - INFO - Memulai Agentic Loop ke-2
+2026-02-16 14:43:03,334 - Orchestrator - WARNING - AI memberikan perintah tanpa tag <shell>. Memicu loop perbaikan.
+2026-02-16 14:43:03,334 - Orchestrator - INFO - Memulai Agentic Loop ke-3
+2026-02-16 14:43:08,669 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:43:08,670 - Orchestrator - INFO - Agentic Loop selesai dalam 32.48 detik (3 loop).
+2026-02-16 14:43:25,510 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:44:10,789 - Orchestrator - INFO - Agentic Loop selesai dalam 45.28 detik (1 loop).
+2026-02-16 14:44:52,996 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:45:00,253 - Orchestrator - INFO - Agentic Loop selesai dalam 7.26 detik (1 loop).
+2026-02-16 14:45:08,838 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:45:17,115 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:45:17,116 - Orchestrator - INFO - Memulai Agentic Loop ke-2
+2026-02-16 14:45:26,002 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:45:26,003 - Orchestrator - INFO - Memulai Agentic Loop ke-3
+2026-02-16 14:49:48,669 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:49:48,671 - Orchestrator - INFO - Agentic Loop selesai dalam 279.83 detik (3 loop).
+2026-02-16 14:49:51,816 - Orchestrator - INFO - Shutdown dimulai: Reloading CodeAron...
+2026-02-16 14:49:51,818 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 14:49:51,868 - Orchestrator - INFO - Shutdown selesai.
+2026-02-16 14:50:14,990 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:50:29,833 - Orchestrator - INFO - Memulai Agentic Loop ke-2
+2026-02-16 14:51:32,049 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 14:51:32,050 - Orchestrator - INFO - Selesai dalam 77.06 detik (2 loop).
+2026-02-16 14:53:31,742 - Orchestrator - INFO - Shutdown dimulai: Reloading CodeAron...
+2026-02-16 14:53:31,746 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 14:53:31,797 - Orchestrator - INFO - Shutdown selesai.
+2026-02-16 14:53:52,097 - Orchestrator - INFO - Memulai Agentic Loop ke-1
+2026-02-16 14:54:10,433 - Orchestrator - INFO - Selesai dalam 18.34 detik (1 loop).
+2026-02-16 14:56:47,727 - Orchestrator - INFO - Shutdown dimulai: Reloading CodeAron...
+2026-02-16 14:56:47,739 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 14:56:47,822 - Orchestrator - INFO - Shutdown selesai.
+2026-02-16 14:58:37,226 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:00:48,850 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:01:42,950 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:02:04,858 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:05:05,535 - Orchestrator - INFO - Shutdown dimulai: Menutup sesi...
+2026-02-16 15:05:05,539 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 15:05:05,591 - Orchestrator - INFO - Shutdown selesai.
+2026-02-16 15:05:51,036 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:06:28,894 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:06:48,315 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:07:18,184 - Orchestrator - INFO - Shutdown dimulai: Menutup sesi...
+2026-02-16 15:07:18,189 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 15:07:18,234 - Orchestrator - INFO - Shutdown selesai.
+2026-02-16 15:08:10,370 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:10:50,614 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:11:14,992 - ValidationEngine - INFO - Menjalankan validasi untuk proyek tipe: generic
+2026-02-16 15:13:05,812 - Orchestrator - INFO - Shutdown dimulai: Menutup sesi...
+2026-02-16 15:13:05,815 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 15:16:30,675 - Orchestrator - INFO - Shutdown dimulai: Interupsi terdeteksi. Keluar...
+2026-02-16 15:16:30,675 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 15:16:30,712 - Orchestrator - INFO - Shutdown dimulai: Interupsi terdeteksi. Keluar...
+2026-02-16 15:16:30,712 - VectorStore - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 15:18:23,834 - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-16 15:21:41,969 - INFO - Koneksi Qdrant berhasil ditutup.
+2026-02-17 03:35:53,850 - ERROR - Pencarian vektor gagal: 'QdrantClient' object has no attribute 'search'
+2026-02-17 03:46:26,911 - ERROR - Pencarian vektor gagal: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:11:37,835 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:11:43,620 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:11:43,621 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:11:47,479 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:11:47,601 - InferenceEngine - ERROR - Generation error: generate_step() got an unexpected keyword argument 'temp'
+2026-02-17 04:12:18,556 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:13:16,749 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:13:16,923 - Orchestrator - WARNING - Semantic Memory disabled: Storage folder /Users/initialh/Projects/CodeAron/qdrant_db is already accessed by another instance of Qdrant client. If you require concurrent access, use Qdrant server instead.
+2026-02-17 04:13:34,260 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:13:34,429 - Orchestrator - WARNING - Semantic Memory disabled: Storage folder /Users/initialh/Projects/CodeAron/qdrant_db is already accessed by another instance of Qdrant client. If you require concurrent access, use Qdrant server instead.
+2026-02-17 04:13:36,885 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:13:40,457 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:13:40,570 - InferenceEngine - ERROR - Generation error: generate_step() got an unexpected keyword argument 'temp'
+2026-02-17 04:17:05,494 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:17:09,702 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:17:09,703 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:17:13,431 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:17:13,499 - InferenceEngine - ERROR - Generation error: generate_step() got an unexpected keyword argument 'temp'
+2026-02-17 04:19:20,188 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:24:22,751 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:24:22,752 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:24:26,005 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:25:11,012 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:25:11,012 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:25:13,552 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:25:54,836 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:25:58,191 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:25:58,192 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:26:00,700 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:29:04,767 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:29:04,768 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:29:10,103 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:29:33,428 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:29:40,739 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:29:45,375 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:29:45,376 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:29:47,786 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:31:16,432 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:31:25,512 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:31:33,104 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:31:36,716 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:31:36,716 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:31:39,166 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:35:26,350 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:35:35,707 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:35:38,334 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:35:38,335 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:35:41,069 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:36:12,244 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:38:10,715 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:38:18,468 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:38:24,807 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:38:24,808 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:38:27,431 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:40:16,233 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:40:22,779 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:40:26,557 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:40:26,558 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:40:29,175 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:40:49,748 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:41:18,510 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:42:02,489 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:42:24,081 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:44:47,018 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:46:03,374 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:46:03,374 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:46:06,073 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:47:21,593 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:47:21,593 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:47:23,910 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:47:46,119 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:47:46,119 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:47:48,344 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:49:15,350 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:49:20,086 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:49:20,087 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:49:22,580 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:52:21,977 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:54:08,348 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:54:08,348 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:54:11,022 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:55:55,270 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:55:55,270 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:55:57,626 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:56:27,625 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:56:33,646 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:56:33,646 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:56:36,326 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:57:38,859 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:58:25,132 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 04:58:31,470 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:58:31,471 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:58:34,133 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 04:58:49,632 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:59:28,830 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:59:43,951 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 04:59:54,766 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 04:59:54,767 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 04:59:57,221 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 05:00:14,909 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 05:01:50,334 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:01:50,334 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 05:01:52,846 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 05:03:51,873 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:03:51,873 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 05:03:54,358 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 05:05:08,825 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:05:21,315 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 05:05:21,316 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 05:05:23,980 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 05:06:02,307 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 05:09:22,848 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-17 05:19:07,185 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 05:23:06,351 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:24:22,381 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:26:17,420 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:26:17,592 - Orchestrator - WARNING - Semantic Memory disabled: Storage folder /Users/initialh/Projects/CodeAron/qdrant_db is already accessed by another instance of Qdrant client. If you require concurrent access, use Qdrant server instead.
+2026-02-17 05:26:34,630 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:26:34,805 - Orchestrator - WARNING - Semantic Memory disabled: Storage folder /Users/initialh/Projects/CodeAron/qdrant_db is already accessed by another instance of Qdrant client. If you require concurrent access, use Qdrant server instead.
+2026-02-17 05:30:18,120 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:30:18,301 - Orchestrator - WARNING - Semantic Memory disabled: Storage folder /Users/initialh/Projects/CodeAron/qdrant_db is already accessed by another instance of Qdrant client. If you require concurrent access, use Qdrant server instead.
+2026-02-17 05:30:45,402 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 05:30:48,539 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 05:35:10,965 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 05:36:27,833 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:36:28,297 - Orchestrator - WARNING - Semantic Memory disabled: Storage folder /Users/initialh/Projects/CodeAron/qdrant_db is already accessed by another instance of Qdrant client. If you require concurrent access, use Qdrant server instead.
+2026-02-17 05:36:42,187 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 05:36:45,041 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 05:39:59,617 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 05:40:07,651 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:40:08,114 - Orchestrator - WARNING - Semantic Memory disabled: Storage folder /Users/initialh/Projects/CodeAron/qdrant_db is already accessed by another instance of Qdrant client. If you require concurrent access, use Qdrant server instead.
+2026-02-17 05:40:38,454 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 05:40:41,519 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 05:41:50,924 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 05:42:14,653 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:42:15,114 - Orchestrator - WARNING - Semantic Memory disabled: Storage folder /Users/initialh/Projects/CodeAron/qdrant_db is already accessed by another instance of Qdrant client. If you require concurrent access, use Qdrant server instead.
+2026-02-17 05:42:33,952 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 05:42:36,407 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 05:47:30,387 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:47:30,387 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 05:47:35,433 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 05:48:17,108 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 05:48:17,108 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 05:48:19,611 - InferenceEngine - INFO - Model loaded successfully.
