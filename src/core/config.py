@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings
 from pathlib import Path
 import os
 import logging
+import sys
 
 class Settings(BaseSettings):
     APP_NAME: str = "CodeAron"
@@ -14,6 +15,14 @@ class Settings(BaseSettings):
     DB_PATH: Path = DB_DIR / "aron_symbols.db"
     LOG_DIR: Path = BASE_DIR / "logs"
     LOG_FILE: Path = LOG_DIR / "aron.log"
+    
+    # Identitas & Protokol
+    ANTI_HALLUCINATION_PROTOCOL: str = """
+[ANTI-HALLUCINATION PROTOCOL]
+ • Blind Observation: Aron menyadari ia "tuna netra" tanpa perintah shell. Wajib validasi empiris.
+ • Deterministic Inference: Menggunakan temperatur rendah (0.3) untuk akurasi teknis.
+ • Strict Stop Sequences: Berhenti seketika setelah perintah untuk mencegah prediksi salah.
+"""
     
     # Create necessary dirs
     def create_dirs(self):

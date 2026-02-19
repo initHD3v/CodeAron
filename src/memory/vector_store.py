@@ -1,5 +1,6 @@
 import os
 import logging
+import hashlib
 from typing import List, Dict, Any
 from fastembed import TextEmbedding
 from qdrant_client import QdrantClient
@@ -15,9 +16,12 @@ class VectorStore:
         os.makedirs(self.cache_dir, exist_ok=True)
         
         self.client = QdrantClient(path=self.db_path)
-        self.collection_name = "code_symbols"
-        self.model = None
         
+        # Buat nama koleksi unik per proyek menggunakan hash path
+        project_hash = hashlib.md5(str(settings.CURRENT_PROJECT_DIR).encode()).hexdigest()[:12]
+        self.collection_name = f"code_symbols_{project_hash}"
+        
+        self.model = None
         self._load_model()
         self._init_collection()
 
@@ -78,20 +82,40 @@ class VectorStore:
         try:
             if not self.model: return []
             query_embedding = list(self.model.embed([query]))[0]
+            qv = query_embedding.tolist()
             
-            # Simple path filtering using native Qdrant filter
-            must_not = [
-                FieldCondition(key="file_path", match=MatchText(text=p)) 
-                for p in settings.IGNORED_DIRS if len(p) > 2
-            ]
+            # Refined filtering: only exclude if a path segment exactly matches an ignored dir
+            must_not = []
+            for p in settings.IGNORED_DIRS:
+                if len(p) > 1:
+                    must_not.append(FieldCondition(key="file_path", match=MatchText(text=p)))
 
-            results = self.client.search(
-                collection_name=self.collection_name,
-                query_vector=query_embedding.tolist(),
-                query_filter=Filter(must_not=must_not),
-                limit=limit
-            )
+            # Gunakan query_points jika tersedia (qdrant-client >= 1.7.0)
+            # Fallback ke search jika gagal
+            try:
+                results = self.client.query_points(
+                    collection_name=self.collection_name,
+                    query=qv,
+                    query_filter=Filter(must_not=must_not) if must_not else None,
+                    limit=limit,
+                    with_payload=True
+                ).points
+            except AttributeError:
+                results = self.client.search(
+                    collection_name=self.collection_name,
+                    query_vector=qv,
+                    query_filter=Filter(must_not=must_not) if must_not else None,
+                    limit=limit,
+                    with_payload=True
+                )
+            
             return [res.payload for res in results if res.payload]
         except Exception as e:
             logger.error(f"Search error: {e}")
             return []
+
+    def count_points(self) -> int:
+        try:
+            return self.client.get_collection(self.collection_name).points_count
+        except:
+            return 0

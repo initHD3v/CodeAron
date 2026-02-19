@@ -412,3 +412,938 @@ FileNotFoundError: [Errno 2] No such file or directory: '/Users/initialh/Project
 2026-02-17 05:48:17,108 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
 2026-02-17 05:48:17,108 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
 2026-02-17 05:48:19,611 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:18:24,861 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:18:30,852 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:19:48,569 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:23:53,003 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:23:59,081 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:24:02,308 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:24:53,630 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:25:08,366 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:25:49,263 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:25:51,744 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:27:08,814 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:27:12,854 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:27:17,660 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:27:20,356 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:28:35,363 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:31:46,380 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:31:56,261 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:31:59,423 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:32:19,539 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:32:41,485 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:32:49,132 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:32:51,528 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:36:19,824 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:36:24,815 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:36:39,725 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:36:42,412 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:36:59,050 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:37:04,449 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:37:09,738 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:37:12,014 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:38:28,418 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:38:28,418 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:38:35,320 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:41:06,688 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:41:13,588 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:41:14,047 - Orchestrator - WARNING - Semantic Memory disabled: Storage folder /Users/initialh/Projects/CodeAron/qdrant_db is already accessed by another instance of Qdrant client. If you require concurrent access, use Qdrant server instead.
+2026-02-17 06:41:21,853 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:41:24,651 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:48:32,531 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:48:32,532 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:48:37,501 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:49:22,259 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:51:01,511 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:51:12,778 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:51:15,572 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:53:30,554 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:53:38,019 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:53:43,873 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-17 06:55:46,607 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-17 06:55:53,403 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-17 06:55:58,014 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-17 06:56:00,856 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 22:27:30,874 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 22:27:31,025 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:27:31,036 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:27:54,052 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:27:54,064 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:28:25,785 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:28:25,796 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:29:15,949 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:29:15,960 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:29:33,354 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:29:33,360 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:29:33,373 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:30:11,360 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:30:11,366 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:30:11,377 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:30:40,434 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:30:40,445 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:30:40,461 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:31:05,395 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:31:05,402 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:31:05,413 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:31:49,911 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:31:49,918 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:31:49,928 - VectorStore - ERROR - Search error: 'QdrantClient' object has no attribute 'search'
+2026-02-19 22:32:46,701 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 22:35:22,575 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 22:35:26,498 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 22:35:30,274 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 22:38:36,673 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 22:40:32,337 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 22:40:49,068 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 22:40:53,053 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 22:43:51,717 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 22:44:17,946 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 22:44:23,930 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 22:44:27,260 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 22:46:02,436 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 22:46:32,424 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 22:46:37,110 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 22:46:39,886 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 22:48:58,344 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 22:50:03,785 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 22:50:06,439 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 22:50:09,790 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 22:50:17,199 - Orchestrator - ERROR - Cycle failed: closing tag '[/dim]' at position 90 doesn't match any open tag
+2026-02-19 22:50:22,132 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 22:51:08,819 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 22:51:22,538 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 22:51:32,407 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 22:51:35,402 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 22:51:39,789 - Orchestrator - ERROR - Cycle failed: closing tag '[/dim]' at position 90 doesn't match any open tag
+2026-02-19 23:02:58,584 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:03:12,835 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:03:15,603 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:03:19,173 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:03:31,686 - Orchestrator - ERROR - Cycle failed: closing tag '[/dim]' at position 90 doesn't match any open tag
+2026-02-19 23:04:54,666 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:14:51,473 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:14:56,779 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:15:00,180 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:15:10,308 - Orchestrator - ERROR - Cycle failed: closing tag '[/dim]' at position 90 doesn't match any open tag
+2026-02-19 23:17:41,702 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:18:07,370 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:18:10,590 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:18:13,973 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:18:39,860 - Orchestrator - ERROR - Cycle failed: closing tag '[/dim]' at position 90 doesn't match any open tag
+2026-02-19 23:20:55,652 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:21:04,776 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:21:14,152 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:21:17,136 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:21:22,273 - InferenceEngine - ERROR - Generation error: closing tag '[/dim]' at position 90 doesn't match any open tag
+2026-02-19 23:21:22,283 - Orchestrator - ERROR - Cycle failed: closing tag '[/dim]' at position 90 doesn't match any open tag
+2026-02-19 23:23:13,021 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:24:31,937 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:24:37,511 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:24:40,717 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:26:42,426 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:26:49,372 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:26:54,753 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:26:57,725 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:29:53,456 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:29:59,764 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:30:06,074 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:30:09,011 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:34:12,973 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:34:18,368 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:34:23,294 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:34:26,377 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:39:36,120 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:40:43,236 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:40:48,942 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:40:51,868 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:41:10,039 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:45:11,029 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:45:16,461 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:45:19,848 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:49:50,839 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:50:01,193 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:50:16,881 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:50:19,933 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:54:03,057 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:54:55,577 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:55:00,708 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:55:04,039 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:55:58,566 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-19 23:56:04,044 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-19 23:56:08,308 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-19 23:56:11,192 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-19 23:56:33,458 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-20 00:15:26,380 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-20 00:15:30,227 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-20 00:15:33,534 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-20 00:15:38,632 - Orchestrator - INFO - Session Metrics: {
+  "intent": "halo aron",
+  "duration_ms": 8434.15379524231,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521330.198179,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521330.1981819,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521330.2268019,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521330.226816,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521338.632179,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521338.6321988,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:15:53,740 - Orchestrator - INFO - Session Metrics: {
+  "intent": "can u swith to indonesian language?",
+  "duration_ms": 5109.905958175659,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521330.198179,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521330.1981819,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521330.2268019,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521330.226816,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521338.632179,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521338.6321988,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    },
+    {
+      "timestamp": 1771521338.632595,
+      "from": "VERIFYING",
+      "to": "COMPLETED"
+    },
+    {
+      "timestamp": 1771521348.630337,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521348.6303391,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521348.7162082,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521348.716217,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521353.740129,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521353.740145,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:16:15,269 - Orchestrator - INFO - Session Metrics: {
+  "intent": "analize thi project and gift me resume ",
+  "duration_ms": 4755.106687545776,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521330.198179,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521330.1981819,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521330.2268019,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521330.226816,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521338.632179,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521338.6321988,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    },
+    {
+      "timestamp": 1771521338.632595,
+      "from": "VERIFYING",
+      "to": "COMPLETED"
+    },
+    {
+      "timestamp": 1771521348.630337,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521348.6303391,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521348.7162082,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521348.716217,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521353.740129,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521353.740145,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    },
+    {
+      "timestamp": 1771521353.7410061,
+      "from": "VERIFYING",
+      "to": "COMPLETED"
+    },
+    {
+      "timestamp": 1771521370.51454,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521370.514543,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521370.543265,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521370.5432699,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521375.269593,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521375.2696,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:19:31,685 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-20 00:19:38,140 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-20 00:19:46,186 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-20 00:19:49,630 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-20 00:19:53,287 - Orchestrator - INFO - Session Metrics: {
+  "intent": "aron",
+  "duration_ms": 7126.572132110596,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521586.16065,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521586.160654,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521586.1855721,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521586.185581,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521593.285989,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521593.286294,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:20:52,167 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-20 00:20:57,702 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-20 00:21:01,939 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-20 00:21:05,119 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-20 00:21:07,915 - Orchestrator - INFO - Session Metrics: {
+  "intent": "halo aron",
+  "duration_ms": 6004.577875137329,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521661.910788,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521661.9107919,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521661.93914,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521661.9391448,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521667.914219,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521667.914249,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:21:18,863 - Orchestrator - INFO - Session Metrics: {
+  "intent": "bisa adalisa project codearon?",
+  "duration_ms": 1456.6750526428223,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521661.910788,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521661.9107919,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521661.93914,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521661.9391448,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521667.914219,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521667.914249,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    },
+    {
+      "timestamp": 1771521667.91606,
+      "from": "VERIFYING",
+      "to": "COMPLETED"
+    },
+    {
+      "timestamp": 1771521677.406663,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521677.406666,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521677.534992,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521677.535218,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521678.8632882,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521678.863297,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:21:48,289 - Orchestrator - INFO - Session Metrics: {
+  "intent": "analisa keseluruahn peoject dan jelsakan project a",
+  "duration_ms": 2035.5660915374756,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521661.910788,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521661.9107919,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521661.93914,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521661.9391448,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521667.914219,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521667.914249,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    },
+    {
+      "timestamp": 1771521667.91606,
+      "from": "VERIFYING",
+      "to": "COMPLETED"
+    },
+    {
+      "timestamp": 1771521677.406663,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521677.406666,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521677.534992,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521677.535218,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521678.8632882,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521678.863297,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    },
+    {
+      "timestamp": 1771521678.864506,
+      "from": "VERIFYING",
+      "to": "COMPLETED"
+    },
+    {
+      "timestamp": 1771521706.2537742,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521706.253778,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521706.289354,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521706.289362,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521708.289268,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521708.289276,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:22:04,425 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-20 00:22:20,266 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-20 00:22:42,338 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-20 00:22:45,259 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-20 00:22:48,245 - Orchestrator - INFO - Session Metrics: {
+  "intent": "halo aron, analisa project zeroad ini dengan menda",
+  "duration_ms": 5927.978038787842,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521762.316989,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521762.316993,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521762.3377101,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521762.337721,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521768.244797,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521768.244838,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:22:56,823 - Orchestrator - INFO - Session Metrics: {
+  "intent": "halo aron, analisa project zeroad ini dengan menda",
+  "duration_ms": 1110.6438636779785,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521762.316989,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521762.316993,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521762.3377101,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521762.337721,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521768.244797,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521768.244838,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    },
+    {
+      "timestamp": 1771521768.245151,
+      "from": "VERIFYING",
+      "to": "COMPLETED"
+    },
+    {
+      "timestamp": 1771521775.71266,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521775.712662,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521775.747165,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521775.74718,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521776.8232262,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521776.823241,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:23:02,035 - Orchestrator - INFO - Session Metrics: {
+  "intent": "halo aron, analisa project zeroad ini dengan menda",
+  "duration_ms": 1248.0270862579346,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.7,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521762.316989,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521762.316993,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521762.3377101,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521762.337721,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521768.244797,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521768.244838,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    },
+    {
+      "timestamp": 1771521768.245151,
+      "from": "VERIFYING",
+      "to": "COMPLETED"
+    },
+    {
+      "timestamp": 1771521775.71266,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521775.712662,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521775.747165,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521775.74718,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521776.8232262,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521776.823241,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    },
+    {
+      "timestamp": 1771521776.823712,
+      "from": "VERIFYING",
+      "to": "COMPLETED"
+    },
+    {
+      "timestamp": 1771521780.787694,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521780.787698,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521780.805614,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521780.805622,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521782.035682,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521782.0356889,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}
+2026-02-20 00:25:54,541 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-20 00:26:26,179 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx
+2026-02-20 00:26:32,471 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx...
+2026-02-20 00:26:35,941 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-20 00:26:39,314 - Orchestrator - INFO - Session Metrics: {
+  "intent": "halo",
+  "duration_ms": 6854.295969009399,
+  "tools_selected": [],
+  "model_used": "DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+  "confidence": 0.55,
+  "retry_count": 0,
+  "state_transitions": [
+    {
+      "timestamp": 1771521992.460031,
+      "from": "IDLE",
+      "to": "ANALYZING"
+    },
+    {
+      "timestamp": 1771521992.460033,
+      "from": "ANALYZING",
+      "to": "PLANNING"
+    },
+    {
+      "timestamp": 1771521992.470594,
+      "from": "PLANNING",
+      "to": "ROUTING"
+    },
+    {
+      "timestamp": 1771521992.4706008,
+      "from": "ROUTING",
+      "to": "EXECUTING"
+    },
+    {
+      "timestamp": 1771521999.3136451,
+      "from": "EXECUTING",
+      "to": "CRITIQUING"
+    },
+    {
+      "timestamp": 1771521999.313681,
+      "from": "CRITIQUING",
+      "to": "VERIFYING"
+    }
+  ]
+}

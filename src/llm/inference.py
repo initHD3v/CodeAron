@@ -63,9 +63,15 @@ class InferenceEngine:
         return settings.DEFAULT_MODEL
 
     def load_model(self):
-        """Memuat model ke memori jika belum dimuat."""
+        """Memuat model ke memori jika belum dimuat dengan validasi RAM."""
         if self.model is not None:
             return
+
+        import psutil
+        vm = psutil.virtual_memory()
+        # Jika RAM tersedia < 1GB (dalam bytes), log warning
+        if vm.available < (1024 ** 3):
+            logger.warning(f"Low RAM detected ({vm.available / (1024**3):.2f} GB). Model loading might be slow or unstable.")
 
         logger.info(f"Loading model from {self.model_path}...")
         try:
@@ -74,7 +80,6 @@ class InferenceEngine:
             if mx: mx.clear_cache()
 
             # Load Model & Tokenizer
-            # mlx_lm.load secara otomatis menangani config (trust_remote_code biasanya tidak perlu untuk MLX format lokal)
             self.model, self.tokenizer = mlx_lm.load(self.model_path)
             
             logger.info("Model loaded successfully.")
@@ -121,22 +126,33 @@ class InferenceEngine:
             
             generated_text = ""
             for response in stream:
-                generated_text += response.text
+                current_chunk = str(response.text)
+                new_total_text = generated_text + current_chunk
                 
                 if stop_sequences:
                     should_stop = False
                     for stop in stop_sequences:
-                        if stop in generated_text:
-                            # Jika ditemukan stop sequence, kita potong teks hingga akhir stop sequence tersebut
-                            # dan kirimkan sisanya sebelum berhenti
+                        if stop in new_total_text:
+                            stop_index = new_total_text.find(stop)
+                            safe_to_send_total = new_total_text[:stop_index]
+                            safe_chunk = safe_to_send_total[len(generated_text):]
+                            if safe_chunk:
+                                yield safe_chunk
                             should_stop = True
                             break
                     if should_stop:
-                        # Kirimkan chunk terakhir (yang mengandung bagian dari stop sequence)
-                        yield response.text
                         break
                 
-                yield response.text
+                # Deteksi Repetisi (Loop Protection)
+                lines = new_total_text.splitlines()
+                if len(lines) > 5:
+                    last_three = lines[-3:]
+                    if len(set(last_three)) == 1 and len(last_three[0].strip()) > 5:
+                        logger.warning("Repetition detected, stopping generation.")
+                        break
+                
+                generated_text = new_total_text
+                yield current_chunk
                 
         except Exception as e:
             logger.error(f"Generation error: {e}")

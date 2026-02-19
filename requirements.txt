@@ -12,3 +12,4 @@ Pillow
 fastembed
 qdrant-client
 psutil
+prompt_toolkit

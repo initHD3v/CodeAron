@@ -9,3 +9,4 @@ codearon.egg-info/top_level.txt
 src/__init__.py
 src/main.py
 tests/test_inference.py
+tests/test_memory.py

@@ -54,7 +54,7 @@ def main(ctx: typer.Context):
 def chat(prompt: str = typer.Argument(..., help="Perintah untuk Aron")):
     """Mulai percakapan dengan CodeAron"""
     orc = get_orchestrator()
-    orc.run_step(prompt)
+    orc.run_cycle(prompt)
 
 @app.command()
 def hub_list():

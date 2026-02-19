@@ -15,6 +15,11 @@ setup(
         "tree-sitter-languages",
         "questionary",
         "sqlmodel",
+        "psutil",
+        "prompt_toolkit",
+        "fastembed",
+        "qdrant-client",
+        "Pillow",
     ],
     entry_points={
         "console_scripts": [

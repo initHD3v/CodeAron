@@ -11,4 +11,9 @@ Requires-Dist: tree-sitter
 Requires-Dist: tree-sitter-languages
 Requires-Dist: questionary
 Requires-Dist: sqlmodel
+Requires-Dist: psutil
+Requires-Dist: prompt_toolkit
+Requires-Dist: fastembed
+Requires-Dist: qdrant-client
+Requires-Dist: Pillow
 Dynamic: requires-dist
