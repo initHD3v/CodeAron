@@ -79,12 +79,13 @@ class UIRenderer:
             )
 
     @staticmethod
-    def render_status_bar(ram: float, cpu: float, status: str = "Idle"):
+    def render_status_bar(ram: float, cpu: float, status: str = "Idle", mem_count: int = 0):
         # Format untuk prompt_toolkit (Bottom Toolbar)
         ram_color = "#00ff00" if ram < 8 else "#ffff00" if ram < 16 else "#ff0000"
         cpu_color = "#00ff00" if cpu < 50 else "#ff0000"
         return (
             f" <b>STATUS:</b> {status} | "
+            f"<b>MEM:</b> {mem_count} pts | "
             f"<b>RAM:</b> <style fg='{ram_color}'>{ram:.1f}GB</style> | "
             f"<b>CPU:</b> <style fg='{cpu_color}'>{cpu:.0f}%</style> "
         )
@@ -152,5 +153,8 @@ class UIRenderer:
         table.add_row("/clear", "Bersihkan layar dan history chat")
         table.add_row("/hub", "Kelola model AI (Download/List)")
         table.add_row("/update", "Periksa dan instal pembaruan CodeAron")
+        table.add_row("/undo", "Batalkan semua perubahan file terakhir")
+        table.add_row("/checkpoint", "Simpan state proyek saat ini (Git Commit)")
+        table.add_row("/vision", "Analisis gambar dengan Vision AI (gunakan: /vision [path])")
         table.add_row("/quit", "Keluar dari sesi")
         console.print(Panel(table, title="[bold yellow]Bantuan Perintah[/bold yellow]", border_style="yellow"))

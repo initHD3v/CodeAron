@@ -51,12 +51,15 @@ class InferenceEngine:
                 if os.path.isdir(os.path.join(model_dir, d)) and not d.startswith('.')
             ]
             if candidates:
-                # Prioritaskan yang mengandung 'mlx' atau '4bit'
+                # Prioritaskan Qwen, lalu Llama, lalu DeepSeek
+                priority = ["qwen", "llama", "deepseek"]
                 best_candidate = candidates[0]
-                for c in candidates:
-                    if 'mlx' in c.lower() and '4bit' in c.lower():
-                        best_candidate = c
-                        break
+                
+                for p in priority:
+                    for c in candidates:
+                        if p in c.lower() and '4bit' in c.lower():
+                            return str(os.path.join(model_dir, c))
+                
                 return str(os.path.join(model_dir, best_candidate))
         
         # 3. Fallback (akan memicu download jika menggunakan string HF repo)

@@ -3,10 +3,11 @@ from pathlib import Path
 import os
 import logging
 import sys
+from src import __version__
 
 class Settings(BaseSettings):
     APP_NAME: str = "CodeAron"
-    VERSION: str = "0.2.1"
+    VERSION: str = __version__
     
     # Path Management
     BASE_DIR: Path = Path(__file__).parent.parent.parent

@@ -35,17 +35,21 @@ class VisionEngine:
     def analyze_image(self, image_path: str, prompt: str = "Describe this image in detail for a Flutter developer.") -> str:
         """Menganalisis gambar berdasarkan prompt yang diberikan."""
         if not self.load_model():
-            return "Vision Engine tidak tersedia."
+            # Fallback: Minta user deskripsikan gambar
+            console.print("[yellow]⚠ Model vision belum terinstall.[/yellow]")
+            console.print("[dim]  Untuk enable vision analysis, download model dengan:[/dim]")
+            console.print("[dim]  python3 -c \"from huggingface_hub import snapshot_download; snapshot_download('mlx-community/moondream2-4bit', local_dir='models/moondream2-mlx')\"[/dim]\n")
+            
+            # Fallback ke deskripsi manual
+            return f"**Image Path:** {image_path}\n\n**Note:** Vision model belum terinstall. Silakan deskripsikan gambar ini secara manual atau install model vision terlebih dahulu.\n\n**File Info:**\n- Size: {os.path.getsize(image_path) / 1024:.1f} KB\n- Format: {os.path.splitext(image_path)[1].upper()}"
 
         try:
             image = Image.open(image_path)
-            # MLX-LM mendukung multimodal input jika modelnya sesuai
-            # Catatan: Implementasi spesifik tergantung pada arsitektur model (misal: moondream vs llava)
             response = mlx_lm.generate(
                 self.model,
                 self.tokenizer,
                 prompt=prompt,
-                image=image, # Pastikan mlx_lm version mendukung ini
+                image=image,
                 max_tokens=500
             )
             return response

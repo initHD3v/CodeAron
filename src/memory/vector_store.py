@@ -1,11 +1,14 @@
 import os
 import logging
 import hashlib
+import fcntl
+from pathlib import Path
 from typing import List, Dict, Any
 from fastembed import TextEmbedding
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct, Filter, FieldCondition, MatchText
 from src.core.config import settings
+from src.core.exceptions import VectorStoreError
 
 logger = logging.getLogger("VectorStore")
 
@@ -15,15 +18,46 @@ class VectorStore:
         self.cache_dir = str(settings.MODEL_DIR / ".embeddings")
         os.makedirs(self.cache_dir, exist_ok=True)
         
-        self.client = QdrantClient(path=self.db_path)
+        # Cleanup stale lock file sebelum init Qdrant
+        self._cleanup_lock_file()
         
+        try:
+            self.client = QdrantClient(path=self.db_path)
+        except Exception as e:
+            logger.error(f"Failed to initialize Qdrant client: {e}")
+            raise VectorStoreError(f"Qdrant initialization failed: {e}", operation="init")
+
         # Buat nama koleksi unik per proyek menggunakan hash path
         project_hash = hashlib.md5(str(settings.CURRENT_PROJECT_DIR).encode()).hexdigest()[:12]
         self.collection_name = f"code_symbols_{project_hash}"
-        
+
         self.model = None
         self._load_model()
         self._init_collection()
+    
+    def _cleanup_lock_file(self):
+        """Cleanup stale lock file dari Qdrant untuk mencegah 'already accessed' error."""
+        lock_file = Path(self.db_path) / ".lock"
+        
+        if not lock_file.exists():
+            return
+        
+        try:
+            # Coba acquire lock dengan mode non-blocking
+            with open(lock_file, 'r+') as f:
+                try:
+                    fcntl.flock(f.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    # Jika berhasil, lock file stale - release dan biarkan Qdrant create baru
+                    fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+                    logger.info("Released stale Qdrant lock file")
+                except (BlockingIOError, IOError):
+                    # Lock sedang digunakan oleh proses lain - biarkan
+                    logger.debug("Qdrant lock file is active by another process")
+        except FileNotFoundError:
+            # File sudah dihapus oleh proses lain
+            pass
+        except Exception as e:
+            logger.warning(f"Lock file cleanup failed: {e}")
 
     def close(self):
         try:
