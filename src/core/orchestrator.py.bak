@@ -26,7 +26,6 @@ from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.styles import Style
 from prompt_toolkit.formatted_text import HTML
-from prompt_toolkit.key_binding import KeyBindings
 
 # System Config
 from src.core.config import settings
@@ -50,15 +49,13 @@ from src.core.confidence import ConfidenceEngine
 from src.core.metrics import MetricsTracker
 from src.core.memory import MemoryManager, ContextCompressor
 from src.core.recovery import RecoveryEngine
-from src.core.smart_analysis import SmartAnalyzer
-from src.core.real_analysis import gather_project_data, build_analysis_prompt
 
 console = Console(theme=ARON_THEME)
 logger = logging.getLogger("Orchestrator")
 
 # Perintah yang aman untuk auto-execute tanpa konfirmasi (harus diperiksa lebih lanjut)
-AUTO_CONFIRM_BASE = ["ls", "pwd", "head", "tail", "find", "grep", "which", "echo", "cat", "wc", "tree"]
-# Catatan: cat sekarang auto-confirm karena read-only
+AUTO_CONFIRM_BASE = ["ls", "pwd", "head", "tail", "find", "grep", "which", "echo"]
+# Catatan: "cat" dihapus dari auto-confirm karena berisiko file besar
 
 # Perintah interaktif yang tidak didukung
 INTERACTIVE_COMMANDS = ["vim", "nano", "git commit", "apt", "npm init", "cpan"]
@@ -145,172 +142,27 @@ class Orchestrator:
             indexer = ProjectIndexer(str(settings.CURRENT_PROJECT_DIR), self.vector_store)
             indexer.scan_project()
 
-        commands = ["/help", "/clear", "/hub", "/update", "/undo", "/checkpoint", "/quit", "@"]
-        
-        # Custom completion untuk gambar DAN commands
-        import glob
-        from prompt_toolkit.completion import Completer, Completion
-        from prompt_toolkit.filters import Condition
-        
-        class AronCompleter(Completer):
-            def __init__(self, cwd):
-                self.cwd = cwd
-                self.image_extensions = ["*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.bmp", "*.svg"]
-                self.commands = {
-                    "/help": "Tampilkan bantuan",
-                    "/clear": "Bersihkan layar",
-                    "/hub": "Kelola model AI",
-                    "/update": "Update CodeAron",
-                    "/undo": "Rollback perubahan",
-                    "/checkpoint": "Git commit",
-                    "/quit": "Keluar",
-                    "/vision": "Analisis gambar",
-                }
-            
-            def get_completions(self, document, complete_event):
-                text = document.text_before_cursor
-                
-                # Completion untuk @ (images) - popup saat ketik @
-                if text == '@' or text.startswith('@'):
-                    image_files = []
-                    for ext in self.image_extensions:
-                        image_files.extend(glob.glob(os.path.join(self.cwd, ext)))
-                        image_files.extend(glob.glob(os.path.join(self.cwd, ext.upper())))
-                    
-                    word_after_at = text[1:] if len(text) > 1 else ""
-                    
-                    for img_path in sorted(image_files):
-                        img_name = os.path.basename(img_path)
-                        if word_after_at == "" or img_name.lower().startswith(word_after_at.lower()):
-                            file_size = os.path.getsize(img_path) / 1024
-                            yield Completion(
-                                img_name,
-                                start_position=-len(word_after_at),
-                                display=f"📷 {img_name} ({file_size:.1f} KB)",
-                                style="fg:cyan"
-                            )
-                
-                # Completion untuk / (commands) - popup saat ketik /
-                elif text == '/' or text.startswith('/'):
-                    word = text
-                    
-                    for cmd, desc in sorted(self.commands.items()):
-                        if cmd.lower().startswith(word.lower()):
-                            yield Completion(
-                                cmd,
-                                start_position=-len(word),
-                                display=HTML(f'<style fg="green">⚡ {cmd}</style> <style fg="gray">{desc}</style>'),
-                                style="fg:green"
-                            )
-        
+        commands = ["/help", "/clear", "/hub", "/update", "/undo", "/checkpoint", "/quit"]
         session = PromptSession(
-            completer=AronCompleter(self.cwd),
-            complete_while_typing=Condition(lambda: True),
+            completer=WordCompleter(commands, ignore_case=True),
             bottom_toolbar=lambda: HTML(self.ui.render_status_bar(
                 self._get_resource_usage()['ram'],
                 self._get_resource_usage()['cpu'],
                 self.state.value,
                 self.vector_store.count_points() if self.vector_store else 0
             )),
-            style=Style.from_dict({
-                'bottom-toolbar': '#ffffff bg:#1a1a1a',
-                'completion-menu.completion': 'bg:#1a1a1a #ffffff',
-                'completion-menu.completion.current': 'bg:#00aaaa #ffffff',
-            }),
+            style=Style.from_dict({'bottom-toolbar': '#ffffff bg:#1a1a1a'}),
             refresh_interval=2.0
         )
-
+        
         console.clear()
         console.print(self.ui.generate_header(settings.VERSION, os.path.basename(self.inference.model_path)))
-
+        
         while True:
             try:
                 user_input = session.prompt(f"╭─❯ ")
                 if not user_input.strip():
                     continue
-                
-                # Check untuk / command tanpa argumen
-                if user_input.strip() == "/":
-                    console.print("[dim]  (Ketik /help, /clear, dll. atau backspace untuk cancel)[/dim]")
-                    continue
-                
-                # Check for @ trigger untuk image analysis
-                if user_input.strip() == "@" or user_input.strip().startswith("@ "):
-                    # Jika hanya @ tanpa filename, abaikan dan lanjut chat
-                    if user_input.strip() == "@":
-                        console.print("[dim]  (Ketik @filename.png untuk analyze gambar, atau backspace untuk cancel)[/dim]")
-                        continue
-                    
-                    # Extract filename jika ada
-                    parts = user_input.strip().split(" ", 1)
-                    if len(parts) > 1 and parts[1].strip():
-                        # User sudah pilih file dari completion
-                        filename = parts[1].strip()
-                        selected_path = os.path.join(self.cwd, filename)
-                        
-                        if os.path.exists(selected_path):
-                            console.print(f"\n[dim]Menganalisis {filename}...[/dim]")
-                            try:
-                                result = self.vision.analyze_image(selected_path, "Deskripsikan gambar ini untuk developer.")
-                                console.print(Panel(result, title=f"Vision Analysis: {filename}", border_style="cyan"))
-                            except Exception as e:
-                                console.print(f"[bold red]Error:[/bold red] {e}")
-                        else:
-                            console.print(f"[yellow]File tidak ditemukan: {filename}[/yellow]")
-                        continue
-                    
-                    # Fallback ke list manual jika tidak ada file dipilih
-                    import glob
-                    image_extensions = ["*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.bmp", "*.svg"]
-                    image_files = []
-                    
-                    for ext in image_extensions:
-                        image_files.extend(glob.glob(os.path.join(self.cwd, ext), recursive=False))
-                        image_files.extend(glob.glob(os.path.join(self.cwd, ext.upper()), recursive=False))
-                    
-                    if not image_files:
-                        console.print("[yellow]⚠ Tidak ada file gambar di direktori ini.[/yellow]")
-                        console.print("[dim]  Supported: PNG, JPG, GIF, WEBP, BMP, SVG[/dim]")
-                        continue
-                    
-                    # Display image files
-                    console.print("\n[bold cyan]📷 Pilih gambar untuk dianalisis:[/bold cyan]")
-                    for idx, img_path in enumerate(sorted(image_files), 1):
-                        img_name = os.path.basename(img_path)
-                        file_size = os.path.getsize(img_path) / 1024
-                        console.print(f"  [dim]{idx}.[/dim] [cyan]{img_name}[/cyan] [dim]({file_size:.1f} KB)[/dim]")
-                    
-                    # Get user selection
-                    try:
-                        selection = questionary.select(
-                            "Pilih gambar (ESC to cancel):",
-                            choices=[os.path.basename(f) for f in sorted(image_files)] + ["❌ Cancel"]
-                        ).ask()
-                        
-                        if not selection or selection == "❌ Cancel":
-                            console.print("[dim]  Cancelled.[/dim]")
-                            continue
-                        
-                        selected_path = None
-                        for f in sorted(image_files):
-                            if os.path.basename(f) == selection:
-                                selected_path = f
-                                break
-                        
-                        if selected_path:
-                            console.print(f"\n[dim]Menganalisis {selection}...[/dim]")
-                            try:
-                                result = self.vision.analyze_image(selected_path, "Deskripsikan gambar ini untuk developer.")
-                                console.print(Panel(result, title=f"Vision Analysis: {selection}", border_style="cyan"))
-                            except Exception as e:
-                                console.print(f"[bold red]Error:[/bold red] {e}")
-                    
-                    except KeyboardInterrupt:
-                        console.print("[dim]  Cancelled.[/dim]")
-                        continue
-                    
-                    continue
-                
                 if user_input == "/quit":
                     break
                 if user_input == "/clear":
@@ -324,15 +176,10 @@ class Orchestrator:
                         console.print("[bold green]✓ Berhasil Rollback.[/bold green]")
                     continue
                 if user_input == "/checkpoint":
-                    try:
-                        msg = questionary.text("Pesan commit (ESC to cancel):").ask()
-                        if not msg or msg.strip() == "":
-                            console.print("[dim]  Commit cancelled.[/dim]")
-                            continue
+                    msg = questionary.text("Pesan commit:").ask()
+                    if msg:
                         self.git.commit_changes(msg)
                         console.print(f"[bold green]✓ Checkpoint '{msg}' dibuat.[/bold green]")
-                    except KeyboardInterrupt:
-                        console.print("[dim]  Commit cancelled.[/dim]")
                     continue
                 if user_input == "/hub":
                     ModelHub().display_hub()
@@ -342,15 +189,7 @@ class Orchestrator:
                     continue
                 if user_input == "/update":
                     from src.tools.updater import AronUpdater
-                    updater = AronUpdater()
-                    
-                    # Check dulu apakah ada update
-                    console.print("[dim]Memeriksa update...[/dim]")
-                    if updater.check_for_updates():
-                        console.print("[bold green]✓ Update tersedia![/bold green]")
-                        updater.perform_update()
-                    else:
-                        console.print("[bold green]✓ Anda menggunakan versi terbaru![/bold green]")
+                    AronUpdater().run_update()
                     continue
                 if user_input.startswith("/vision"):
                     # Handle vision command for image analysis
@@ -359,85 +198,11 @@ class Orchestrator:
                         image_path = parts[1].strip()
                         prompt = "Deskripsikan gambar ini untuk developer."
                     else:
-                        # Custom input dengan ESC handling
-                        console.print("[dim]Path ke gambar (ESC to cancel):[/dim]", end=" ")
-                        try:
-                            import select, tty, termios, sys
-                            
-                            # Save terminal settings
-                            fd = sys.stdin.fileno()
-                            old_settings = termios.tcgetattr(fd)
-                            
-                            try:
-                                tty.setraw(fd)
-                                chars = []
-                                
-                                while True:
-                                    ch = sys.stdin.read(1)
-                                    if ch == '\x1b':  # ESC
-                                        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-                                        console.print("\r[dim]  Vision cancelled.[/dim]")
-                                        console.print()  # New line
-                                        break
-                                    elif ch == '\r' or ch == '\n':  # Enter
-                                        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-                                        console.print()  # New line
-                                        break
-                                    elif ch == '\x7f' or ch == '\b':  # Backspace
-                                        if chars:
-                                            chars.pop()
-                                            console.print("\b \b", end="")
-                                    else:
-                                        chars.append(ch)
-                                        console.print(ch, end="")
-                                
-                                # Restore settings
-                                termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-                                
-                                image_path = ''.join(chars).strip()
-                                if not image_path:
-                                    continue
-                                
-                                # Optional prompt
-                                console.print("[dim]Pertanyaan (ESC to skip):[/dim]", end=" ")
-                                chars = []
-                                old_settings = termios.tcgetattr(fd)
-                                try:
-                                    tty.setraw(fd)
-                                    while True:
-                                        ch = sys.stdin.read(1)
-                                        if ch == '\x1b':  # ESC
-                                            prompt = "Deskripsikan gambar ini untuk developer."
-                                            break
-                                        elif ch == '\r' or ch == '\n':
-                                            break
-                                        elif ch == '\x7f' or ch == '\b':
-                                            if chars:
-                                                chars.pop()
-                                                console.print("\b \b", end="")
-                                        else:
-                                            chars.append(ch)
-                                            console.print(ch, end="")
-                                    prompt = ''.join(chars).strip() or "Deskripsikan gambar ini untuk developer."
-                                finally:
-                                    termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-                                console.print()
-                                
-                            except Exception as e:
-                                # Fallback to questionary jika custom input gagal
-                                image_path = questionary.text("Path ke gambar:").ask()
-                                if not image_path:
-                                    continue
-                                prompt = questionary.text("Pertanyaan (opsional):", 
-                                                        default="Deskripsikan gambar ini untuk developer.").ask()
-                                if prompt is None:
-                                    prompt = "Deskripsikan gambar ini untuk developer."
-                                    
-                        except KeyboardInterrupt:
-                            console.print("\r[dim]  Vision cancelled.[/dim]")
-                            console.print()
+                        image_path = questionary.text("Path ke gambar:").ask()
+                        if not image_path:
                             continue
-
+                        prompt = questionary.text("Pertanyaan tentang gambar (opsional):", default="Deskripsikan gambar ini untuk developer.").ask()
+                    
                     try:
                         result = self.vision.analyze_image(image_path.strip(), prompt)
                         console.print(Panel(result, title="Vision Analysis", border_style="cyan"))
@@ -471,29 +236,19 @@ class Orchestrator:
         is_simple_shell = any(re.match(pattern, initial_input.strip()) for pattern in simple_patterns)
         
         if is_simple_shell:
-            cmd = initial_input.strip()
-            # Smart filtering untuk ls -R
-            if cmd == "ls -R" or cmd == "ls":
-                # Gunakan find untuk skip directory yang tidak perlu
-                cmd = "find . -maxdepth 3 -type f -not -path '*/\\.*' -not -path '*/__pycache__/*' -not -path '*/.venv/*' -not -path '*/venv/*' -not -path '*/node_modules/*' | head -50"
-            
-            result = self._run_shell(cmd)
+            # Direct execution tanpa cognitive loop
+            result = self._run_shell(initial_input.strip())
             if result.success:
                 output = result.output if result.output.strip() else "(tidak ada output)"
                 if len(output) > 3000:
                     output = output[:1500] + "\n... [truncated] ...\n" + output[-1500:]
                 console.print(Panel(output, title=f"Output: {initial_input.strip()}", border_style="green"))
                 self.chat_history.append({"role": "User", "content": initial_input})
-                self.chat_history.append({"role": "Aron", "content": f"Executed: {initial_input.strip()}"})
+                self.chat_history.append({"role": "Aron", "content": f"Command executed: {initial_input.strip()}"})
                 return output
             else:
                 console.print(f"[red]Error: {result.error}[/red]")
                 return result.error
-        
-        # 2. SMART ANALYSIS - Deep project analysis
-        analysis_keywords = ["analisa", "analisis", "analyze", "review project", "lihat project"]
-        if any(keyword in initial_input.lower() for keyword in analysis_keywords):
-            return self._smart_analysis(initial_input)
         
         # === SLOW PATH: Cognitive loop untuk task kompleks ===
         
@@ -517,13 +272,9 @@ class Orchestrator:
         while depth < 3:  # Reduced from 5 to 3 max iterations
             try:
                 self.state = AronState.PLANNING
-                try:
-                    raw_context = self.memory.get_combined_context(current_input)
-                    comp_context = self.compressor.compress(raw_context)
-                except Exception as e:
-                    logger.warning(f"Context retrieval failed: {e}. Using minimal context.")
-                    comp_context = f"Current directory: {self.cwd}\nNo additional context available."
-
+                raw_context = self.memory.get_combined_context(current_input)
+                comp_context = self.compressor.compress(raw_context)
+                
                 task_plan = self.planner.create_plan(current_input, comp_context)
                 # Task complexity hidden
                 # for step in task_plan.steps:
@@ -620,31 +371,20 @@ class Orchestrator:
                 self.chat_history.append({"role": "Aron", "content": clean_response})
                 
                 depth += 1
-                # console.print(f"\n[dim italic] ● Berpikir... (Putaran {int(depth)}/5)[/dim italic]")
+                console.print(f"\n[dim italic] ● Berpikir... (Putaran {int(depth)}/5)[/dim italic]")
 
             except Exception as e:
                 logger.error(f"Cycle failed: {e}")
-                # User-friendly error message
-                if "Operation not supported by device" in str(e):
-                    console.print(f"[yellow]⚠ Model inference error. Coba restart Aron dengan [/yellow][bold]/quit[/bold][yellow] dan jalankan lagi.[/yellow]")
-                else:
-                    console.print(f"[red]Terjadi kesalahan internal: {e}[/red]")
+                console.print(f"[red]Terjadi kesalahan internal: {e}[/red]")
                 self.state = AronState.FAILED
                 break
 
         if critic_feedback is None:
             critic_feedback = self.critic.evaluate(initial_input, clean_response or "")
-        
-        # Adjust confidence based on command complexity
-        # Simple commands should have higher base confidence
-        simple_commands = ["halo", "hai", "hi", "ls", "pwd", "cat", "head", "tail", "echo", "whoami", "date"]
-        is_simple = any(word in initial_input.lower() for word in simple_commands)
-        
         conf_score = self.confidence_engine.calculate_score(
             critic_severity=critic_feedback.severity_score,
             tool_success=bool(action_results),
-            retry_count=refinement_count,
-            model_certainty=0.95 if is_simple else 0.85  # Higher base for simple commands
+            retry_count=refinement_count
         )
         console.print(f"[dim]● Final Confidence: [bold]{conf_score:.2f}[/bold][/dim]")
         
@@ -655,43 +395,6 @@ class Orchestrator:
             "iterations": depth + 1,
             "model": "qwen2.5-coder"
         })
-    
-    def _smart_analysis(self, initial_input: str) -> str:
-        """Smart analysis dengan AI reasoning - BUKAN template!"""
-        console.print("[bold cyan]🔍 Menganalisis project secara mendalam...[/bold cyan]\n")
-        
-        try:
-            console.print("[dim]  Collecting project data...[/dim]")
-            project_data = gather_project_data(str(self.cwd))
-            
-            console.print("[dim]  Building context...[/dim]")
-            prompt = build_analysis_prompt(project_data)
-            
-            console.print("[dim]  Generating AI insights...[/dim]\n")
-            
-            messages = [
-                {"role": "system", "content": "Senior Architect. DEEP, CRITICAL analysis in BAHASA INDONESIA. Be specific!"},
-                {"role": "user", "content": prompt}
-            ]
-            
-            try:
-                formatted = self.inference.tokenizer.apply_chat_template(
-                    messages, tokenize=False, add_generation_prompt=True
-                )
-            except Exception:
-                formatted = f"{prompt}"
-            
-        except Exception as e:
-            console.print(f"[bold red]❌ Error saat analisis:[/bold red] {e}")
-            return "Terjadi kesalahan saat melakukan analisis."
-        
-        return formatted
-    
-    def _run_cognitive_loop(self, initial_input: str) -> str:
-        """Run cognitive loop untuk complex tasks."""
-        # This is the existing cognitive loop logic
-        # For now, just return a message
-        return "Menggunakan analisis standar..."
 
     def _sanitize_history(self) -> List[Dict[str, str]]:
         clean_history = []
@@ -709,26 +412,27 @@ class Orchestrator:
         
         system_rules = (
             "You are Aron, a Senior AI Architect running LOCALLY on Apple Silicon.\n"
-            "IMPORTANT: ALWAYS respond in BAHASA INDONESIA unless user explicitly requests English.\n"
             "Current directory: {cwd}\n\n"
             "MANDATORY RULES:\n"
-            "1. For 'analisa' or 'analyze' requests: FIRST read README.md or main files, THEN provide structured analysis.\n"
-            "2. Use <shell>command</shell> for terminal actions.\n"
-            "3. Use <file path=\"...\">content</file> for file writing.\n"
-            "4. NO Markdown blocks (```). Just execute.\n"
-            "5. ALWAYS verify file exists before cat: use 'ls filename' or 'test -f filename' first.\n"
-            "6. If command fails, acknowledge error and try alternative approach.\n"
-            "7. After gathering info, provide SUMMARY with: Project Type, Structure, Key Files, Recommendations.\n"
-            "8. Keep responses concise and actionable.\n"
+            "1. Use <shell>command</shell> for ALL terminal actions (ls, cat, grep, etc.).\n"
+            "2. Use <file path=\"...\">content</file> for ALL file writing.\n"
+            "3. NO Markdown blocks (```). NO tutorials. Just execute.\n"
+            "4. For analysis, ALWAYS run <shell>ls -R</shell> first.\n"
+            "5. After getting ls output, read important files with <shell>cat <file></shell>.\n"
+            "6. If a command fails, use the error to decide next step, don't just repeat.\n"
+            "7. Never provide analysis without reading files first.\n"
+            "8. For git commits, ALWAYS use -m flag with a message.\n"
             "9. Avoid interactive commands like vim, nano, etc.\n"
-            "10. For directory listing, use 'find' command to skip .venv, __pycache__, node_modules.\n\n"
-            "EXAMPLE ANALYSIS FLOW:\n"
-            "User: analisa project ini\n"
+            "10. Output from commands will be given as [ENVIRONMENT] messages.\n\n"
+            "EXAMPLE FLOW:\n"
+            "User: analisa projek ini\n"
+            "Assistant: <shell>ls -R</shell>\n"
+            "User: Output perintah 'ls -R': README.md  src/  pubspec.yaml\n"
             "Assistant: <shell>cat README.md</shell>\n"
-            "User: [README content]\n"
-            "Assistant: <shell>ls *.py</shell>\n"
-            "User: [file list]\n"
-            "Assistant: ## Analisis Project\n\n**Type:** Python App\n**Structure:** [summary]\n**Key Files:** [list]\n**Recommendations:** [suggestions]\n"
+            "User: [content README]\n"
+            "Assistant: <shell>cat pubspec.yaml</shell>\n"
+            "User: [content pubspec.yaml]\n"
+            "Assistant: (Now provide analysis based on those files)"
         ).format(cwd=self.cwd)  # Gunakan self.cwd yang dilacak
 
         messages = [{"role": "system", "content": system_rules}]
@@ -821,13 +525,8 @@ class Orchestrator:
             # Cek apakah perintah dimulai dengan salah satu base command
             for base in AUTO_CONFIRM_BASE:
                 if cmd.startswith(base):
-                    # Whitelist safe pipe patterns untuk grep, filter, sort
-                    SAFE_PIPE_PATTERNS = ['grep', 'filter', 'sort', 'head', 'tail', 'wc', 'uniq', 'awk', 'sed']
-                    has_safe_pipe = '|' in cmd and any(p in cmd for p in SAFE_PIPE_PATTERNS)
-                    
-                    # Periksa karakter berbahaya (tapi allow pipe untuk safe patterns)
-                    dangerous_chars = r'[;&`$()<>]'
-                    if re.search(dangerous_chars, cmd) and not has_safe_pipe:
+                    # Periksa karakter berbahaya
+                    if re.search(r'[;&|`$()<>]', cmd):
                         console.print(Panel(f"[bold yellow]Perintah '{cmd}' mengandung karakter berbahaya, konfirmasi manual.[/bold yellow]", border_style="yellow"))
                         auto_confirm = False
                         break
@@ -855,12 +554,19 @@ class Orchestrator:
                     pass  # Jika parsing gagal, fallback ke aturan biasa
 
             if auto_confirm:
-                # Silent execution untuk auto-confirm commands
+                console.print(Panel(f"[bold cyan]{cmd}[/bold cyan]", title="Perintah Sistem (Auto-Exec)", border_style="cyan"))
+                confirm = True
+            else:
+                console.print(Panel(f"[bold yellow]{cmd}[/bold yellow]", title="Perintah Sistem (Auto-Detected)", border_style="yellow"))
+                confirm = questionary.confirm("Jalankan perintah di atas?", default=True).ask()
+
+            if confirm:
                 res = self._run_shell(cmd)
                 self.state = AronState.VERIFYING
                 if res.success:
                     # Reset failure counter on success
                     self._consecutive_failures = 0
+                    console.print(f"[bold green]✓ Berhasil[/bold green]")
                     output = res.output if res.output.strip() else "(tidak ada output)"
                     # Truncation cerdas
                     if len(output) > 2000:
@@ -868,36 +574,7 @@ class Orchestrator:
                         console.print("[yellow]⚠ Output sangat panjang, dipotong untuk efisiensi.[/yellow]")
                     results.append(f"Output perintah '{cmd}':\n{output}")
                 else:
-                    # Graceful error handling - jangan tampilkan panel merah
-                    logger.debug(f"Command failed: {res.error}")
-                    results.append(f"Perintah '{cmd}' GAGAL: {res.error}")
-                    # Tambahkan error ke context agar AI bisa adapt
-                    console.print(f"[dim]  (Note: {res.error})[/dim]")
-                continue  # Skip confirmation panel untuk auto-confirm
-            
-            # Non-auto-confirm commands tampilkan panel
-            console.print(Panel(f"[bold yellow]{cmd}[/bold yellow]", title="Perintah Sistem (Auto-Detected)", border_style="yellow"))
-            try:
-                confirm = questionary.confirm("Jalankan perintah di atas? (ESC to cancel)", default=True).ask()
-                if confirm is None:  # ESC pressed
-                    console.print("[dim]  Command cancelled.[/dim]")
-                    continue
-            except KeyboardInterrupt:
-                console.print("[dim]  Command cancelled.[/dim]")
-                continue
-
-            if confirm:
-                res = self._run_shell(cmd)
-                self.state = AronState.VERIFYING
-                if res.success:
-                    self._consecutive_failures = 0
-                    console.print(f"[bold green]✓ Berhasil[/bold green]")
-                    output = res.output if res.output.strip() else "(tidak ada output)"
-                    if len(output) > 2000:
-                        output = output[:1000] + "\n... [truncated] ...\n" + output[-1000:]
-                        console.print("[yellow]⚠ Output sangat panjang, dipotong.[/yellow]")
-                    results.append(f"Output perintah '{cmd}':\n{output}")
-                else:
+                    # Increment failure counter
                     self._consecutive_failures += 1
                     logger.warning(f"Command failed ({self._consecutive_failures}/{self._max_consecutive_failures}): {res.error}")
                     console.print(f"[bold red]✗ Gagal: {res.error}[/bold red]")

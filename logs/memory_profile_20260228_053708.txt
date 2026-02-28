@@ -1,0 +1,13 @@
+CodeAron Memory Profiling Report
+==================================================
+
+Initial Memory: 172.84 MB
+Final Memory: 703.89 MB
+Total Change: +531.05 MB
+Peak Memory: 97.82 MB
+
+Per-Command Breakdown:
+  halo: +0.02 MB
+  analisa project ini: +1.47 MB
+  ls: +0.02 MB
+  cat README.md: +0.00 MB
