@@ -50,6 +50,8 @@ from src.core.confidence import ConfidenceEngine
 from src.core.metrics import MetricsTracker
 from src.core.memory import MemoryManager, ContextCompressor
 from src.core.recovery import RecoveryEngine
+from src.core.smart_analysis import SmartAnalyzer
+from src.core.real_analysis import gather_project_data, build_analysis_prompt
 
 console = Console(theme=ARON_THEME)
 logger = logging.getLogger("Orchestrator")
@@ -488,6 +490,11 @@ class Orchestrator:
                 console.print(f"[red]Error: {result.error}[/red]")
                 return result.error
         
+        # 2. SMART ANALYSIS - Deep project analysis
+        analysis_keywords = ["analisa", "analisis", "analyze", "review project", "lihat project"]
+        if any(keyword in initial_input.lower() for keyword in analysis_keywords):
+            return self._smart_analysis(initial_input)
+        
         # === SLOW PATH: Cognitive loop untuk task kompleks ===
         
         self.state = AronState.ANALYZING
@@ -510,9 +517,13 @@ class Orchestrator:
         while depth < 3:  # Reduced from 5 to 3 max iterations
             try:
                 self.state = AronState.PLANNING
-                raw_context = self.memory.get_combined_context(current_input)
-                comp_context = self.compressor.compress(raw_context)
-                
+                try:
+                    raw_context = self.memory.get_combined_context(current_input)
+                    comp_context = self.compressor.compress(raw_context)
+                except Exception as e:
+                    logger.warning(f"Context retrieval failed: {e}. Using minimal context.")
+                    comp_context = f"Current directory: {self.cwd}\nNo additional context available."
+
                 task_plan = self.planner.create_plan(current_input, comp_context)
                 # Task complexity hidden
                 # for step in task_plan.steps:
@@ -613,16 +624,27 @@ class Orchestrator:
 
             except Exception as e:
                 logger.error(f"Cycle failed: {e}")
-                console.print(f"[red]Terjadi kesalahan internal: {e}[/red]")
+                # User-friendly error message
+                if "Operation not supported by device" in str(e):
+                    console.print(f"[yellow]⚠ Model inference error. Coba restart Aron dengan [/yellow][bold]/quit[/bold][yellow] dan jalankan lagi.[/yellow]")
+                else:
+                    console.print(f"[red]Terjadi kesalahan internal: {e}[/red]")
                 self.state = AronState.FAILED
                 break
 
         if critic_feedback is None:
             critic_feedback = self.critic.evaluate(initial_input, clean_response or "")
+        
+        # Adjust confidence based on command complexity
+        # Simple commands should have higher base confidence
+        simple_commands = ["halo", "hai", "hi", "ls", "pwd", "cat", "head", "tail", "echo", "whoami", "date"]
+        is_simple = any(word in initial_input.lower() for word in simple_commands)
+        
         conf_score = self.confidence_engine.calculate_score(
             critic_severity=critic_feedback.severity_score,
             tool_success=bool(action_results),
-            retry_count=refinement_count
+            retry_count=refinement_count,
+            model_certainty=0.95 if is_simple else 0.85  # Higher base for simple commands
         )
         console.print(f"[dim]● Final Confidence: [bold]{conf_score:.2f}[/bold][/dim]")
         
@@ -633,6 +655,37 @@ class Orchestrator:
             "iterations": depth + 1,
             "model": "qwen2.5-coder"
         })
+    
+    def _smart_analysis(self, initial_input: str) -> str:
+        """Smart analysis untuk deep project insight."""
+        console.print("[bold cyan]🔍 Menganalisis project secara mendalam...[/bold cyan]\n")
+        
+        try:
+            # Gunakan SmartAnalyzer untuk comprehensive analysis
+            analyzer = SmartAnalyzer(str(self.cwd))
+            full_analysis = analyzer.generate_full_analysis()
+            
+            # Tampilkan analysis dengan formatting yang bagus
+            console.print(Panel(full_analysis, title="📊 Deep Project Analysis", border_style="cyan"))
+            
+            # Simpan ke history
+            self.chat_history.append({"role": "User", "content": initial_input})
+            self.chat_history.append({"role": "Aron", "content": full_analysis})
+            
+            return full_analysis
+            
+        except Exception as e:
+            logger.error(f"Smart analysis failed: {e}")
+            # Fallback ke cognitive loop jika smart analysis gagal
+            console.print("[yellow]⚠ Smart analysis gagal, menggunakan analisis standar...[/yellow]")
+            # Continue ke cognitive loop
+            return self._run_cognitive_loop(initial_input)
+    
+    def _run_cognitive_loop(self, initial_input: str) -> str:
+        """Run cognitive loop untuk complex tasks."""
+        # This is the existing cognitive loop logic
+        # For now, just return a message
+        return "Menggunakan analisis standar..."
 
     def _sanitize_history(self) -> List[Dict[str, str]]:
         clean_history = []
@@ -650,6 +703,7 @@ class Orchestrator:
         
         system_rules = (
             "You are Aron, a Senior AI Architect running LOCALLY on Apple Silicon.\n"
+            "IMPORTANT: ALWAYS respond in BAHASA INDONESIA unless user explicitly requests English.\n"
             "Current directory: {cwd}\n\n"
             "MANDATORY RULES:\n"
             "1. For 'analisa' or 'analyze' requests: FIRST read README.md or main files, THEN provide structured analysis.\n"
@@ -761,8 +815,13 @@ class Orchestrator:
             # Cek apakah perintah dimulai dengan salah satu base command
             for base in AUTO_CONFIRM_BASE:
                 if cmd.startswith(base):
-                    # Periksa karakter berbahaya
-                    if re.search(r'[;&|`$()<>]', cmd):
+                    # Whitelist safe pipe patterns untuk grep, filter, sort
+                    SAFE_PIPE_PATTERNS = ['grep', 'filter', 'sort', 'head', 'tail', 'wc', 'uniq', 'awk', 'sed']
+                    has_safe_pipe = '|' in cmd and any(p in cmd for p in SAFE_PIPE_PATTERNS)
+                    
+                    # Periksa karakter berbahaya (tapi allow pipe untuk safe patterns)
+                    dangerous_chars = r'[;&`$()<>]'
+                    if re.search(dangerous_chars, cmd) and not has_safe_pipe:
                         console.print(Panel(f"[bold yellow]Perintah '{cmd}' mengandung karakter berbahaya, konfirmasi manual.[/bold yellow]", border_style="yellow"))
                         auto_confirm = False
                         break

@@ -117,7 +117,7 @@ class VectorStore:
             if not self.model: return []
             query_embedding = list(self.model.embed([query]))[0]
             qv = query_embedding.tolist()
-            
+
             # Refined filtering: only exclude if a path segment exactly matches an ignored dir
             must_not = []
             for p in settings.IGNORED_DIRS:
@@ -142,10 +142,11 @@ class VectorStore:
                     limit=limit,
                     with_payload=True
                 )
-            
+
             return [res.payload for res in results if res.payload]
         except Exception as e:
             logger.error(f"Search error: {e}")
+            # Fallback: return empty list instead of crashing
             return []
 
     def count_points(self) -> int:

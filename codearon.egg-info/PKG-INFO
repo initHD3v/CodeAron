@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: codearon
-Version: 0.2.0
+Version: 0.3.0
 Requires-Dist: mlx-lm
 Requires-Dist: typer[all]
 Requires-Dist: rich

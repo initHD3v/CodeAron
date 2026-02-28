@@ -8,5 +8,8 @@ codearon.egg-info/requires.txt
 codearon.egg-info/top_level.txt
 src/__init__.py
 src/main.py
+tests/test_config_manager.py
+tests/test_exceptions.py
 tests/test_inference.py
 tests/test_memory.py
+tests/test_orchestrator_integration.py

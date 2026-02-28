@@ -32,18 +32,26 @@ class MemoryManager:
                 self.project_context['readme'] = f.read()[:2000]
 
     def get_combined_context(self, query: str) -> str:
+        """Get combined context dengan graceful fallback."""
         # Short Term
         st_text = "\n[SHORT-TERM SESSION]\n" + "\n".join([f"{m['role']}: {m['content']}" for m in self.short_term[-5:]])
-        
+
         # Project Memory
         pm_text = "\n[PROJECT CONTEXT]\n" + (self.project_context.get('readme', 'No README found'))
-        
-        # Long Term (Vector)
+
+        # Long Term (Vector) - dengan fallback
         lt_text = "\n[LONG-TERM MEMORY]\n"
         if self.vector_store:
-            results = self.vector_store.search(query, limit=3)
-            lt_text += "\n".join([f"File: {r['file_path']}\n{r['content'][:500]}" for r in results])
-        
+            try:
+                results = self.vector_store.search(query, limit=3)
+                if results:
+                    lt_text += "\n".join([f"File: {r['file_path']}\n{r['content'][:500]}" for r in results])
+                else:
+                    lt_text += "No relevant symbols found in vector memory."
+            except Exception as e:
+                # Graceful fallback jika vector search gagal
+                lt_text += f"Vector search unavailable (using project context only)."
+
         return f"{pm_text}\n{lt_text}\n{st_text}"
 
 class ContextCompressor:
