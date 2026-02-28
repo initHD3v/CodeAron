@@ -48,7 +48,7 @@ class UIRenderer:
             # 0. Buat salinan konten untuk dibersihkan
             clean_content = content
             
-            # Buang token DeepSeek yang mungkin bocor secara agresif
+            # Buang token LLM yang mungkin bocor secara agresif
             tokens_to_strip = [
                 "<｜User｜>", "<｜Assistant｜>", "<｜end of sentence｜>", "<｜begin of sentence｜>",
                 "<｜tool▁call▁begin｜>", "<｜tool▁call▁end｜>", "<｜tool▁sep｜>", "function"

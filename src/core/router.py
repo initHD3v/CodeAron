@@ -12,9 +12,9 @@ class ToolRouter:
             "qdrant": {"score": 0.7, "desc": "Search semantic memory"}
         }
         self.models = {
-            "fast": "deepseek-coder-v2-lite-instruct",
-            "heavy": "deepseek-v3", # Placeholder for larger model
-            "summarizer": "gemma-2b"
+            "fast": "qwen2.5-coder-7b-instruct",
+            "heavy": "qwen2.5-coder-32b-instruct",
+            "summarizer": "qwen2.5-7b-instruct"
         }
 
     def route(self, intent: str, context: str) -> Dict[str, Any]:

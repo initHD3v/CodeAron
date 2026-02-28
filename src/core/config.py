@@ -34,7 +34,8 @@ class Settings(BaseSettings):
     CURRENT_PROJECT_DIR: Path = Path(os.getcwd())
     
     # MLX / LLM Settings
-    DEFAULT_MODEL: str = "mlx-community/deepseek-coder-6.7b-instruct-4bit"
+    DEFAULT_MODEL: str = "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit"
+    FALLBACK_MODEL: str = "mlx-community/Qwen2.5-Coder-14B-Instruct-4bit"
     MAX_TOKENS_GEN: int = 2000
     CONTEXT_WINDOW_LIMIT: int = 24000
     

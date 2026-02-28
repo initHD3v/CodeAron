@@ -51,8 +51,8 @@ class InferenceEngine:
                 if os.path.isdir(os.path.join(model_dir, d)) and not d.startswith('.')
             ]
             if candidates:
-                # Prioritaskan Qwen, lalu Llama, lalu DeepSeek
-                priority = ["qwen", "llama", "deepseek"]
+                # Prioritaskan Qwen, lalu Llama
+                priority = ["qwen", "llama"]
                 best_candidate = candidates[0]
                 
                 for p in priority:

@@ -23,7 +23,8 @@ class ModelHub:
         """Daftar model yang direkomendasikan untuk CodeAron."""
         return [
             {"name": "Qwen2.5-Coder-7B (4-bit)", "id": "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit", "size": "~4.5GB"},
-            {"name": "DeepSeek-Coder-V2-Lite (4-bit)", "id": "mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx", "size": "~10GB"},
+            {"name": "Qwen2.5-Coder-14B (4-bit)", "id": "mlx-community/Qwen2.5-Coder-14B-Instruct-4bit", "size": "~9GB"},
+            {"name": "Qwen2.5-Coder-32B (4-bit)", "id": "mlx-community/Qwen2.5-Coder-32B-Instruct-4bit", "size": "~18GB"},
             {"name": "Llama-3.1-8B-Instruct (4-bit)", "id": "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit", "size": "~5.5GB"},
             {"name": "Moondream2 (Vision) (4-bit)", "id": "mlx-community/moondream2-4bit", "size": "~1.5GB"}
         ]

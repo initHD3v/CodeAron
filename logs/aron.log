@@ -9110,3 +9110,33 @@ FileNotFoundError: [Errno 2] No such file or directory: '/Users/initialh/Project
 2026-02-28 06:53:57,040 - VectorStore - INFO - Released stale Qdrant lock file
 2026-02-28 07:00:00,660 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit
 2026-02-28 07:00:00,660 - VectorStore - INFO - Released stale Qdrant lock file
+2026-02-28 07:13:53,901 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit
+2026-02-28 07:13:53,902 - VectorStore - INFO - Released stale Qdrant lock file
+2026-02-28 07:16:36,655 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit
+2026-02-28 07:16:36,656 - VectorStore - INFO - Released stale Qdrant lock file
+2026-02-28 07:16:38,803 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit...
+2026-02-28 07:16:40,635 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-28 07:20:57,201 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit
+2026-02-28 07:20:57,202 - VectorStore - INFO - Released stale Qdrant lock file
+2026-02-28 07:21:02,876 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit...
+2026-02-28 07:21:04,623 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-28 07:22:37,201 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-28 07:33:39,377 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit
+2026-02-28 07:33:39,379 - VectorStore - INFO - Released stale Qdrant lock file
+2026-02-28 07:33:44,629 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit...
+2026-02-28 07:33:46,675 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-28 07:33:48,743 - InferenceEngine - WARNING - Repetition detected, stopping generation.
+2026-02-28 07:34:19,270 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-28 07:34:32,810 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit
+2026-02-28 07:34:32,810 - VectorStore - INFO - Released stale Qdrant lock file
+2026-02-28 07:34:38,521 - InferenceEngine - INFO - Loading model from /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit...
+2026-02-28 07:34:40,155 - InferenceEngine - INFO - Model loaded successfully.
+2026-02-28 07:36:54,335 - Orchestrator - INFO - Rate limiting: waiting 1.98s before executing 'ls *.py'
+2026-02-28 07:36:56,361 - Orchestrator - INFO - Rate limiting: waiting 1.96s before executing 'ls *.sh'
+2026-02-28 07:36:58,369 - Orchestrator - INFO - Rate limiting: waiting 1.96s before executing 'ls *.json'
+2026-02-28 07:37:00,372 - Orchestrator - INFO - Rate limiting: waiting 1.96s before executing 'ls *.txt'
+2026-02-28 07:37:02,378 - Orchestrator - INFO - Rate limiting: waiting 1.96s before executing 'ls *.log'
+2026-02-28 07:37:04,387 - Orchestrator - INFO - Rate limiting: waiting 1.96s before executing 'ls *.ipynb'
+2026-02-28 07:37:09,370 - InferenceEngine - INFO - Model unloaded from memory.
+2026-02-28 07:41:45,345 - InferenceEngine - INFO - InferenceEngine initialized. Model target: /Users/initialh/Projects/CodeAron/models/Qwen2.5-Coder-7B-Instruct-4bit
+2026-02-28 07:41:45,346 - VectorStore - INFO - Released stale Qdrant lock file

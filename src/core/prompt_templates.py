@@ -9,7 +9,6 @@ from enum import Enum
 class ModelFamily(Enum):
     QWEN = "qwen"
     LLAMA = "llama"
-    DEEPSEEK = "deepseek"
     CHATML = "chatml"
     UNKNOWN = "unknown"
 
@@ -22,8 +21,6 @@ class PromptTemplateManager:
             return ModelFamily.QWEN
         elif "llama" in model_name:
             return ModelFamily.LLAMA
-        elif "deepseek" in model_name:
-            return ModelFamily.DEEPSEEK
         return ModelFamily.CHATML
     
     @staticmethod
@@ -32,8 +29,6 @@ class PromptTemplateManager:
             return PromptTemplateManager._build_qwen(messages, system_prompt)
         elif model_family == ModelFamily.LLAMA:
             return PromptTemplateManager._build_llama(messages, system_prompt)
-        elif model_family == ModelFamily.DEEPSEEK:
-            return PromptTemplateManager._build_deepseek(messages, system_prompt)
         return PromptTemplateManager._build_chatml(messages, system_prompt)
     
     @staticmethod
@@ -73,10 +68,6 @@ class PromptTemplateManager:
                 prompt += content + "<|eot_id|>"
         prompt += "<|start_header_id|>assistant<|end_header_id|>\n\n"
         return prompt
-    
-    @staticmethod
-    def _build_deepseek(messages: List[Dict[str, str]], system_prompt: str = None) -> str:
-        return PromptTemplateManager._build_chatml(messages, system_prompt)
     
     @staticmethod
     def _build_chatml(messages: List[Dict[str, str]], system_prompt: str = None) -> str:

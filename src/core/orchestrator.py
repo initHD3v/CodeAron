@@ -657,7 +657,7 @@ class Orchestrator:
         })
     
     def _smart_analysis(self, initial_input: str) -> str:
-        """Smart analysis dengan AI reasoning - BUKAN template!"""
+        """Smart analysis dengan AI reasoning - streaming output!"""
         console.print("[bold cyan]🔍 Menganalisis project secara mendalam...[/bold cyan]\n")
         
         try:
@@ -667,26 +667,36 @@ class Orchestrator:
             console.print("[dim]  Building context...[/dim]")
             prompt = build_analysis_prompt(project_data)
             
-            console.print("[dim]  Generating AI insights...[/dim]\n")
+            console.print("[dim]  Generating AI insights...[/dim]")
+            console.print("[dim]  (30-60 detik)[/dim]\n")
             
             messages = [
-                {"role": "system", "content": "Senior Architect. DEEP, CRITICAL analysis in BAHASA INDONESIA. Be specific!"},
+                {"role": "system", "content": "Senior Architect. DEEP analysis in BAHASA INDONESIA."},
                 {"role": "user", "content": prompt}
             ]
             
             try:
-                formatted = self.inference.tokenizer.apply_chat_template(
-                    messages, tokenize=False, add_generation_prompt=True
-                )
-            except Exception:
-                formatted = f"{prompt}"
+                formatted = self.inference.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+            except:
+                formatted = prompt
+            
+            # Stream output - WAIT untuk LLM
+            from rich.live import Live
+            full_response = ""
+            
+            with Live(console=console, refresh_per_second=4) as live:
+                for chunk in self.inference.generate_stream(formatted, temp=0.3, max_tokens=1500):
+                    full_response += chunk
+                    live.update(Panel(full_response, title="📊 Analysis", border_style="cyan"))
+            
+            self.chat_history.append({"role": "User", "content": initial_input})
+            self.chat_history.append({"role": "Aron", "content": full_response})
+            
+            return full_response
             
         except Exception as e:
-            console.print(f"[bold red]❌ Error saat analisis:[/bold red] {e}")
-            return "Terjadi kesalahan saat melakukan analisis."
-        
-        return formatted
-    
+            console.print(f"[bold red]❌ Error:[/bold red] {e}")
+            return "Terjadi kesalahan."
     def _run_cognitive_loop(self, initial_input: str) -> str:
         """Run cognitive loop untuk complex tasks."""
         # This is the existing cognitive loop logic

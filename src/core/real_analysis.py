@@ -78,37 +78,20 @@ def gather_project_data(cwd: str) -> Dict[str, Any]:
 
 
 def build_analysis_prompt(data: Dict[str, Any]) -> str:
-    """Build prompt untuk deep AI analysis."""
-    return f"""
-You are a Senior Software Architect. Analyze this project DEEPLY in BAHASA INDONESIA.
+    """Build prompt untuk AI analysis - OPTIMIZED untuk speed & no loop."""
+    return f"""Analyze this project in BAHASA INDONESIA. Be concise.
 
-PROJECT DATA:
-- Type: {data['type']}
-- Files: {', '.join(data['structure'][:12])}
-- Main Code: {', '.join(data['main_files'][:8])}
-- Issues: {', '.join(data['issues']) if data['issues'] else 'None obvious'}
+Type: {data['type']}
+Files: {', '.join(data['structure'][:8])}
+Issues: {', '.join(data['issues']) if data['issues'] else 'None'}
+README: {data['readme'][:300] if data['readme'] else 'No README'}
 
-README:
-{data['readme'][:800] if data['readme'] else 'No README'}
+Give me:
+1. APA INI? (1 kalimat)
+2. STRUKTUR (organized?)
+3. ISSUES (any problems?)
+4. RECOMMENDATIONS (2-3 items)
+5. KESIMPULAN (1 kalimat)
 
-Config:
-{list(data['configs'].keys())}
-
----
-
-Provide REAL INSIGHTS (not generic advice):
-
-1. **APA INI?** - Project apa ini? Untuk apa?
-
-2. **ANALISIS STRUKTUR** - Apakah terorganisir baik? Ada masalah?
-
-3. **CODE QUALITY** - Dari file structure, apakah code berkualitas?
-
-4. **ISSUES SPESIFIK** - Masalah apa yang kamu lihat di project INI?
-
-5. **RECOMMENDATIONS** - 3-5 saran SPESIFIK untuk project ini (bukan generic!)
-
-6. **KESIMPULAN** - Resume singkat
-
-Be HONEST and CRITICAL. Don't sugarcoat issues!
+Max 200 words. Don't repeat yourself!
 """

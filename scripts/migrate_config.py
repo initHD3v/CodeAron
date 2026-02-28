@@ -69,7 +69,7 @@ def migrate_old_config(old_config):
         "version": "1.0",
         "model": {
             "default": "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit",
-            "fallback": "mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit",
+            "fallback": "mlx-community/Qwen2.5-Coder-14B-Instruct-4bit",
         },
         "memory": {
             "max_short_term": 10,
@@ -139,7 +139,7 @@ def generate_new_config(config_file, old_config=None):
             "version": "1.0",
             "model": {
                 "default": "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit",
-                "fallback": "mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit",
+                "fallback": "mlx-community/Qwen2.5-Coder-14B-Instruct-4bit",
             },
             "memory": {
                 "max_short_term": 10,
