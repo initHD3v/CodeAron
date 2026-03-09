@@ -3,7 +3,7 @@ import os
 import sys
 import gc
 import logging
-from typing import Optional, Generator
+from typing import Optional, Generator, Dict
 from src.core.config import settings
 
 # Setup logging
@@ -16,6 +16,61 @@ except ImportError:
     mx = None
     make_sampler = None
     logger.warning("MLX or mlx-lm sample_utils not found. Inference will fail.")
+
+
+class InferenceConfig:
+    """
+    Task-specific inference configurations.
+    Temperature lebih rendah untuk task yang butuh presisi tinggi.
+    """
+    # Coding tasks - presisi maksimal
+    CODING = {
+        "temperature": 0.2,
+        "max_tokens": 2000,
+        "top_p": 0.9,
+        "description": "Code generation, modification, and debugging"
+    }
+    
+    # Analysis tasks - balanced antara kreativitas dan akurasi
+    ANALYSIS = {
+        "temperature": 0.3,
+        "max_tokens": 1500,
+        "top_p": 0.9,
+        "description": "Project analysis and code review"
+    }
+    
+    # Planning tasks - butuh struktur yang jelas
+    PLANNING = {
+        "temperature": 0.4,
+        "max_tokens": 1000,
+        "top_p": 0.9,
+        "description": "Task planning and architecture design"
+    }
+    
+    # Chat/General - lebih kreatif untuk conversational
+    CHAT = {
+        "temperature": 0.7,
+        "max_tokens": 500,
+        "top_p": 0.95,
+        "description": "General conversation and greetings"
+    }
+    
+    # Shell commands - deterministik untuk command execution
+    SHELL = {
+        "temperature": 0.1,
+        "max_tokens": 300,
+        "top_p": 0.85,
+        "description": "Shell command generation"
+    }
+    
+    @classmethod
+    def get_config(cls, task_type: str) -> Dict:
+        """Get config for specific task type."""
+        task_type_upper = task_type.upper()
+        if hasattr(cls, task_type_upper):
+            return getattr(cls, task_type_upper)
+        # Default to CODING for unknown tasks (safer for code tasks)
+        return cls.CODING
 
 class InferenceEngine:
     _instance = None
@@ -102,28 +157,45 @@ class InferenceEngine:
             gc.collect()
             logger.info("Model unloaded from memory.")
 
-    def generate_stream(self, prompt: str, max_tokens: int = 1000, temp: float = 0.7, stop_sequences: list = None) -> Generator[str, None, None]:
-        """Generator streaming untuk respon AI."""
+    def generate_stream(self, prompt: str, task_type: str = "coding", max_tokens: int = None, temp: float = None, stop_sequences: list = None) -> Generator[str, None, None]:
+        """
+        Generator streaming untuk respon AI dengan task-specific settings.
+        
+        Args:
+            prompt: Input prompt
+            task_type: Type of task (coding, analysis, planning, chat, shell)
+            max_tokens: Override max tokens (optional)
+            temp: Override temperature (optional)
+            stop_sequences: Stop sequences to halt generation
+        """
         if not self.model:
             self.load_model()
+
+        # Get task-specific config
+        config = InferenceConfig.get_config(task_type)
+        
+        # Use provided values or fallback to config
+        temperature = temp if temp is not None else config["temperature"]
+        tokens = max_tokens if max_tokens is not None else config["max_tokens"]
+        top_p = config["top_p"]
 
         # Proteksi Context Window Sederhana
         if len(prompt) > settings.CONTEXT_WINDOW_LIMIT:
             logger.warning("Prompt too long, truncating...")
             prompt = prompt[-settings.CONTEXT_WINDOW_LIMIT:]
 
+        logger.debug(f"Generating with task_type={task_type}, temp={temperature}, max_tokens={tokens}")
+
         try:
-            # Gunakan sampler dari mlx_lm.sample_utils
-            sampler = make_sampler(temp=temp) if make_sampler else None
-            
+            # Gunakan sampler dari mlx_lm.sample_utils dengan temperature dan top_p
+            sampler = make_sampler(temp=temperature, top_p=top_p) if make_sampler else None
+
             # Gunakan stream_generate dari mlx_lm
-            # max_tokens di sini adalah output tokens
-            # Stop sequences mencegah model "bicara sendiri" sebagai User
             stream = mlx_lm.stream_generate(
                 self.model,
                 self.tokenizer,
                 prompt=prompt,
-                max_tokens=max_tokens,
+                max_tokens=tokens,
                 sampler=sampler
             )
             
@@ -165,17 +237,39 @@ class InferenceEngine:
             if mx: mx.eval(None) # Ensure computation is done? (Not strictly needed in stream)
             pass
 
-    def generate_oneshot(self, prompt: str, max_tokens: int = 2000) -> str:
-        """Generate full response sekaligus (bukan streaming)."""
+    def generate_oneshot(self, prompt: str, task_type: str = "coding", max_tokens: int = None, temp: float = None) -> str:
+        """
+        Generate full response sekaligus (bukan streaming) dengan task-specific settings.
+        
+        Args:
+            prompt: Input prompt
+            task_type: Type of task (coding, analysis, planning, chat, shell)
+            max_tokens: Override max tokens (optional)
+            temp: Override temperature (optional)
+        """
         if not self.model:
             self.load_model()
-            
+
+        # Get task-specific config
+        config = InferenceConfig.get_config(task_type)
+        
+        # Use provided values or fallback to config
+        temperature = temp if temp is not None else config["temperature"]
+        tokens = max_tokens if max_tokens is not None else config["max_tokens"]
+        top_p = config["top_p"]
+
+        logger.debug(f"Oneshot generating with task_type={task_type}, temp={temperature}, max_tokens={tokens}")
+
         try:
+            # Create sampler with task-specific settings
+            sampler = make_sampler(temp=temperature, top_p=top_p) if make_sampler else None
+            
             return mlx_lm.generate(
                 self.model,
                 self.tokenizer,
                 prompt=prompt,
-                max_tokens=max_tokens,
+                max_tokens=tokens,
+                sampler=sampler,
                 verbose=False
             )
         except Exception as e:

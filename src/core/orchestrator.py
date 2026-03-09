@@ -542,8 +542,9 @@ class Orchestrator:
                     termios.tcflush(sys.stdin, termios.TCIFLUSH)
                     tty.setcbreak(sys.stdin.fileno())
                     with Live(console=console, refresh_per_second=4) as live:
+                        # Gunakan task_type="coding" untuk presisi maksimal (temp=0.2)
                         for chunk in self.inference.generate_stream(
-                            prompt, temp=0.1,
+                            prompt, task_type="coding",
                             stop_sequences=["<|im_start|>", "<|im_end|>", "User:", "Assistant:"]
                         ):
                             full_response += chunk
@@ -683,9 +684,10 @@ class Orchestrator:
             # Stream output - WAIT untuk LLM
             from rich.live import Live
             full_response = ""
-            
+
             with Live(console=console, refresh_per_second=4) as live:
-                for chunk in self.inference.generate_stream(formatted, temp=0.3, max_tokens=1500):
+                # Gunakan task_type="analysis" untuk balanced accuracy (temp=0.3)
+                for chunk in self.inference.generate_stream(formatted, task_type="analysis", max_tokens=1500):
                     full_response += chunk
                     live.update(Panel(full_response, title="📊 Analysis", border_style="cyan"))
             
