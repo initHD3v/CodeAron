@@ -31,7 +31,7 @@ from prompt_toolkit.key_binding import KeyBindings
 # System Config
 from src.core.config import settings
 from src.core.states import AronState, ExecutionResult
-from src.core.prompt_templates import PromptTemplateManager, ModelFamily
+from src.core.prompt_templates import PromptTemplateManager, ModelFamily, ARON_SYSTEM_PROMPT
 from src.llm.inference import InferenceEngine
 from src.tools.patcher import CodePatcher
 from src.tools.validator import ValidationEngine
@@ -713,33 +713,25 @@ class Orchestrator:
 
     def _build_prompt(self, user_input: str, rag_context: str) -> str:
         history = self._sanitize_history()
-        
+
         # Deteksi model untuk fallback template
         model_name = os.path.basename(self.inference.model_path).lower()
-        
+
+        # Gunakan ARON_SYSTEM_PROMPT yang sudah dioptimasi
         system_rules = (
-            "You are Aron, a Senior AI Architect running LOCALLY on Apple Silicon.\n"
-            "IMPORTANT: ALWAYS respond in BAHASA INDONESIA unless user explicitly requests English.\n"
-            "Current directory: {cwd}\n\n"
-            "MANDATORY RULES:\n"
-            "1. For 'analisa' or 'analyze' requests: FIRST read README.md or main files, THEN provide structured analysis.\n"
-            "2. Use <shell>command</shell> for terminal actions.\n"
-            "3. Use <file path=\"...\">content</file> for file writing.\n"
-            "4. NO Markdown blocks (```). Just execute.\n"
-            "5. ALWAYS verify file exists before cat: use 'ls filename' or 'test -f filename' first.\n"
-            "6. If command fails, acknowledge error and try alternative approach.\n"
-            "7. After gathering info, provide SUMMARY with: Project Type, Structure, Key Files, Recommendations.\n"
-            "8. Keep responses concise and actionable.\n"
-            "9. Avoid interactive commands like vim, nano, etc.\n"
-            "10. For directory listing, use 'find' command to skip .venv, __pycache__, node_modules.\n\n"
-            "EXAMPLE ANALYSIS FLOW:\n"
-            "User: analisa project ini\n"
-            "Assistant: <shell>cat README.md</shell>\n"
-            "User: [README content]\n"
-            "Assistant: <shell>ls *.py</shell>\n"
-            "User: [file list]\n"
-            "Assistant: ## Analisis Project\n\n**Type:** Python App\n**Structure:** [summary]\n**Key Files:** [list]\n**Recommendations:** [suggestions]\n"
-        ).format(cwd=self.cwd)  # Gunakan self.cwd yang dilacak
+            f"{ARON_SYSTEM_PROMPT}\n\n"
+            "CONTEXT:\n"
+            f"Current directory: {self.cwd}\n"
+            f"RAG Context:\n{rag_context if rag_context else 'No additional context'}\n\n"
+            "TECHNICAL RULES:\n"
+            "1. Use <shell>command</shell> for terminal actions.\n"
+            "2. Use <file path=\"...\">content</file> for file writing.\n"
+            "3. NO Markdown blocks (```) for commands. Just execute.\n"
+            "4. ALWAYS verify file exists before reading: use 'ls' or 'test -f' first.\n"
+            "5. If command fails, acknowledge error and try alternative approach.\n"
+            "6. For directory listing, use 'find' to skip .venv, __pycache__, node_modules.\n"
+            "7. Avoid interactive commands like vim, nano, git commit, etc.\n"
+        )
 
         messages = [{"role": "system", "content": system_rules}]
         for m in history:

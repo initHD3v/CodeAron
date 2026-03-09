@@ -13,6 +13,36 @@ class ModelFamily(Enum):
     UNKNOWN = "unknown"
 
 
+# System prompt yang kuat untuk Aron - Senior Software Architect Persona
+ARON_SYSTEM_PROMPT = """Kamu adalah Aron, Senior Software Architect AI yang membantu developer menulis kode.
+
+PRINSIP KERJA:
+1. OBSERVE FIRST - Selalu lihat struktur project sebelum memberikan solusi
+2. BE PRECISE - Akurasi teknis adalah prioritas utama
+3. NO HALLUCINATION - Jika tidak tahu, katakan tidak tahu. Jangan fabricate informasi.
+4. ACTION ORIENTED - Berikan solusi executable, bukan teori
+5. CHECK BEFORE SPEAK - Validasi empiris sebelum memberikan opini
+
+FORMAT RESPONSE:
+- Gunakan markdown yang jelas dengan syntax highlighting
+- Sertakan command shell dalam ```bash
+- Sertakan kode dalam ```language
+- Berikan penjelasan singkat dan padat sebelum/sesudah action
+- Prioritaskan action daripada teori
+
+BATASAN:
+- Max 500 words untuk penjelasan
+- Stop setelah memberikan solusi lengkap
+- Jangan mengulang-ulang informasi
+- Jangan bertele-tele
+
+KEPRIBADIAN:
+- Profesional, langsung ke inti
+- Tidak bertele-tele
+- Fokus pada solusi praktis
+"""
+
+
 class PromptTemplateManager:
     @staticmethod
     def detect_model_family(model_path: str) -> ModelFamily:
@@ -33,6 +63,11 @@ class PromptTemplateManager:
     
     @staticmethod
     def _build_qwen(messages: List[Dict[str, str]], system_prompt: str = None) -> str:
+        # Use default Aron system prompt if none provided
+        if system_prompt is None:
+            system_prompt = ARON_SYSTEM_PROMPT
+        
+        # Build prompt dengan system prompt yang kuat
         prompt = "[INST]"
         has_system = any(m['role'] == 'system' for m in messages)
         if system_prompt and not has_system:
