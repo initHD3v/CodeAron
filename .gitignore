@@ -12,11 +12,36 @@ __pycache__/
 # Environment / DB
 .env
 aron_memory.db
-
-# macOS
-.DS_Store
+qdrant_db/
 
 # Build
 build/
 dist/
 *.egg-info/
+
+# macOS
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Temporary / Debug Files
+fix*.py
+test_*.py
+smoke_test*.py
+orch_part*.py
+*_backup.py
+*.bak
+*.bak2
+*.txt
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Qwen Code
+.qwen/

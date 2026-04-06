@@ -156,5 +156,16 @@ class UIRenderer:
         table.add_row("/undo", "Batalkan semua perubahan file terakhir")
         table.add_row("/checkpoint", "Simpan state proyek saat ini (Git Commit)")
         table.add_row("/vision", "Analisis gambar dengan Vision AI (gunakan: /vision [path])")
+        table.add_row("/skill", "Jalankan specialized skills (review, explain, test, refactor)")
         table.add_row("/quit", "Keluar dari sesi")
         console.print(Panel(table, title="[bold yellow]Bantuan Perintah[/bold yellow]", border_style="yellow"))
+        
+        # Skills quick reference
+        skills_table = Table(title="📚 Quick Skills Reference", box=None)
+        skills_table.add_column("Skill", style="green")
+        skills_table.add_column("Usage", style="white")
+        skills_table.add_row("/skill review", "Review code untuk correctness, security, performance")
+        skills_table.add_row("/skill explain", "Jelaskan kode atau konsep teknis")
+        skills_table.add_row("/skill test", "Generate unit tests untuk code")
+        skills_table.add_row("/skill refactor", "Refactor code untuk improve quality")
+        console.print(Panel(skills_table, title="[bold cyan]Available Skills[/bold cyan]", border_style="cyan"))
