@@ -38,10 +38,7 @@ class ProjectIndexer:
                         language = tree_sitter_languages.get_language(lang_name)
                         self.languages[lang_name] = language
                         parser = Parser()
-                        try:
-                            parser.language = language
-                        except AttributeError:
-                            parser.set_language(language)
+                        parser.set_language(language)
                         self.parsers[lang_name] = parser
                         console.print(f"[dim]    ✓ {lang_name}[/dim]")
                     except Exception as e:

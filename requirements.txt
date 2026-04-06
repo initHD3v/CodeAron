@@ -4,8 +4,8 @@ rich
 gitpython
 pydantic
 pydantic-settings
-tree-sitter
-tree-sitter-languages
+tree-sitter==0.21.3
+tree-sitter-languages==1.10.2
 questionary
 sqlmodel
 Pillow

@@ -14,32 +14,71 @@ class ModelFamily(Enum):
 
 
 # System prompt yang kuat untuk Aron - Senior Software Architect Persona
-ARON_SYSTEM_PROMPT = """Kamu adalah Aron, Senior Software Architect AI yang membantu developer menulis kode.
+ARON_SYSTEM_PROMPT = """You are Aron, a Senior Software Architect AI.
 
-PRINSIP KERJA:
-1. OBSERVE FIRST - Selalu lihat struktur project sebelum memberikan solusi
-2. BE PRECISE - Akurasi teknis adalah prioritas utama
-3. NO HALLUCINATION - Jika tidak tahu, katakan tidak tahu. Jangan fabricate informasi.
-4. ACTION ORIENTED - Berikan solusi executable, bukan teori
-5. CHECK BEFORE SPEAK - Validasi empiris sebelum memberikan opini
+RULES:
+1. OBSERVE FIRST - Check project structure before answering
+2. BE PRECISE - Technical accuracy > everything
+3. NO HALLUCINATION - If unsure, say so. Never fabricate info
+4. ACTION ORIENTED - Give executable solutions, not theory
+5. CHECK BEFORE SPEAK - Validate empirically before opinions
 
-FORMAT RESPONSE:
-- Gunakan markdown yang jelas dengan syntax highlighting
-- Sertakan command shell dalam ```bash
-- Sertakan kode dalam ```language
-- Berikan penjelasan singkat dan padat sebelum/sesudah action
-- Prioritaskan action daripada teori
+RESPONSE FORMAT:
+- Use markdown with syntax highlighting
+- Shell commands in ```bash blocks
+- Code in ```language blocks
+- Brief explanation before/after action
+- Actions > theory
 
-BATASAN:
-- Max 500 words untuk penjelasan
-- Stop setelah memberikan solusi lengkap
-- Jangan mengulang-ulang informasi
-- Jangan bertele-tele
+CONSTRAINTS:
+- Max 300 words explanation
+- Stop after complete solution
+- No repetition
+- No fluff
 
-KEPRIBADIAN:
-- Profesional, langsung ke inti
-- Tidak bertele-tele
-- Fokus pada solusi praktis
+PERSONA:
+- Professional, direct
+- Solution-focused
+- No rambling
+
+EXAMPLES:
+
+User: "How do I list files in current directory?"
+Aron: Use the `ls` command:
+
+```bash
+ls -la
+```
+
+This shows all files including hidden ones with details.
+
+---
+
+User: "Fix the syntax error in src/main.py"
+Aron: Let me check the file first.
+
+```bash
+cat src/main.py
+```
+
+[After reading file] Found missing colon on line 5. Here's the fix:
+
+```python
+def greet(name):
+    print(f"Hello, {name}!")
+```
+
+---
+
+User: "What does this function do? def factorial(n): return 1 if n <= 1 else n * factorial(n-1)"
+Aron: This is a **recursive factorial** function.
+
+- **Base case**: returns 1 when n <= 1
+- **Recursive case**: returns n * factorial(n-1)
+- **Time complexity**: O(n)
+- **Space complexity**: O(n) due to call stack
+
+Warning: Will hit recursion limit for n > 1000 in Python.
 """
 
 
@@ -63,23 +102,32 @@ class PromptTemplateManager:
     
     @staticmethod
     def _build_qwen(messages: List[Dict[str, str]], system_prompt: str = None) -> str:
-        # Use default Aron system prompt if none provided
+        """
+        Build prompt menggunakan ChatML format (standar Qwen2.5).
+        Format: <|im_start|>{role}\n{content}<|im_end|>\n
+        """
         if system_prompt is None:
             system_prompt = ARON_SYSTEM_PROMPT
-        
-        # Build prompt dengan system prompt yang kuat
-        prompt = "[INST]"
+
+        prompt = ""
         has_system = any(m['role'] == 'system' for m in messages)
+
+        # System message (pertama kali, sebelum messages lain)
         if system_prompt and not has_system:
-            prompt += " <<SYS>>" + system_prompt + "<</SYS>>\n\n"
+            prompt += "<|im_start|>system\n" + system_prompt + "<|im_end|>\n"
+
         for msg in messages:
             role = msg['role']
             content = msg['content']
             if role == 'system':
-                prompt += "<<SYS>>" + content + "<</SYS>>\n\n"
-            elif role in ('user', 'assistant'):
-                prompt += content + "\n"
-        prompt += "[/INST]"
+                prompt += "<|im_start|>system\n" + content + "<|im_end|>\n"
+            elif role == 'user':
+                prompt += "<|im_start|>user\n" + content + "<|im_end|>\n"
+            elif role == 'assistant':
+                prompt += "<|im_start|>assistant\n" + content + "<|im_end|>\n"
+
+        # Akhiri dengan assistant header (model akan lanjut dari sini)
+        prompt += "<|im_start|>assistant\n"
         return prompt
     
     @staticmethod
@@ -115,7 +163,20 @@ class PromptTemplateManager:
     
     @staticmethod
     def sanitize_output(response: str) -> str:
-        tokens = ["<|User|>", "<|Assistant|>", "<｜User｜>", "<｜Assistant｜>"]
-        for t in tokens:
+        """Hapus token artifacts dari output model."""
+        # ChatML special tokens
+        chatml_tokens = [
+            "<|im_end|>", "<|im_start|>",
+            "<|User|>", "<|Assistant|>",
+            "<｜User｜>", "<｜Assistant｜>",
+            "<|end_of_sentence|>",
+        ]
+        for t in chatml_tokens:
             response = response.replace(t, "")
+
+        # Hapus trailing special tokens di awal/akhir
+        import re
+        response = re.sub(r'^\s*<\|.*?\|>\s*', '', response)
+        response = re.sub(r'\s*<\|.*?\|>\s*$', '', response)
+
         return response.strip()

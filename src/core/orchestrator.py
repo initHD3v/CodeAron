@@ -32,6 +32,8 @@ from prompt_toolkit.key_binding import KeyBindings
 from src.core.config import settings
 from src.core.states import AronState, ExecutionResult
 from src.core.prompt_templates import PromptTemplateManager, ModelFamily, ARON_SYSTEM_PROMPT
+from src.core.skill_manager import get_skill_manager, SkillDefinition
+from src.core.skill_executor import get_skill_executor, SkillStatus
 from src.llm.inference import InferenceEngine
 from src.tools.patcher import CodePatcher
 from src.tools.validator import ValidationEngine
@@ -63,6 +65,30 @@ AUTO_CONFIRM_BASE = ["ls", "pwd", "head", "tail", "find", "grep", "which", "echo
 # Perintah interaktif yang tidak didukung
 INTERACTIVE_COMMANDS = ["vim", "nano", "git commit", "apt", "npm init", "cpan"]
 
+# Skill System - Trigger patterns untuk auto-detect intent
+SKILL_TRIGGERS = {
+    "review": [
+        "review", "check", "audit", "inspect", "evaluate",
+        "code review", "periksa", "tinjau", "analisis kode",
+        "cek error", "cek bug", "cari bug", "temukan masalah"
+    ],
+    "explain": [
+        "explain", "describe", "how does", "what is", "jelaskan",
+        "apa itu", "bagaimana cara", "cara kerja", "fungsi",
+        "purpose", "meaning", "understand", "pahami"
+    ],
+    "test": [
+        "test", "generate tests", "write tests", "buat test",
+        "buat unit test", "testing", "unit test", "test coverage",
+        "buatkan test", "generate unit test"
+    ],
+    "refactor": [
+        "refactor", "improve", "clean up", "optimize",
+        "perbaiki", "optimasi", "bersihkan", "refactor kode",
+        "improve quality", "better code", "lebih baik"
+    ],
+}
+
 class Orchestrator:
     def __init__(self):
         self.chat_history: List[Dict[str, str]] = []
@@ -85,6 +111,10 @@ class Orchestrator:
         self.ui = UIRenderer()
         self.git = GitGuard(str(settings.CURRENT_PROJECT_DIR))
         self.vision = VisionEngine()
+        
+        # Initialize Skill System
+        self.skill_manager = get_skill_manager()
+        self.skill_executor = get_skill_executor(self)
         
         try:
             self.vector_store = VectorStore()
@@ -145,7 +175,7 @@ class Orchestrator:
             indexer = ProjectIndexer(str(settings.CURRENT_PROJECT_DIR), self.vector_store)
             indexer.scan_project()
 
-        commands = ["/help", "/clear", "/hub", "/update", "/undo", "/checkpoint", "/quit", "@"]
+        commands = ["/help", "/clear", "/hub", "/update", "/undo", "/checkpoint", "/quit", "/skill", "/benchmark", "@"]
         
         # Custom completion untuk gambar DAN commands
         import glob
@@ -165,6 +195,7 @@ class Orchestrator:
                     "/checkpoint": "Git commit",
                     "/quit": "Keluar",
                     "/vision": "Analisis gambar",
+                    "/skill": "Jalankan skill (review, explain, test, refactor)",
                 }
             
             def get_completions(self, document, complete_event):
@@ -337,6 +368,17 @@ class Orchestrator:
                 if user_input == "/hub":
                     ModelHub().display_hub()
                     continue
+
+                if user_input == "/benchmark":
+                    from src.core.benchmark import BenchmarkSuite
+                    console.print("[bold cyan]🧪 Starting CodeAron Benchmark...[/bold cyan]")
+                    console.print("[dim]This will take 1-3 minutes. Please wait.[/dim]")
+                    print()
+                    suite = BenchmarkSuite(self)
+                    report = suite.run_all()
+                    console.print(report.render())
+                    continue
+
                 if user_input == "/help":
                     self.ui.render_help()
                     continue
@@ -444,10 +486,201 @@ class Orchestrator:
                     except Exception as e:
                         console.print(f"[bold red]Error:[/bold red] {e}")
                     continue
+                
+                # Handle /skill command
+                if user_input.startswith("/skill"):
+                    import asyncio
+                    asyncio.run(self._handle_skill_command(user_input))
+                    continue
+                
                 self.run_cycle(user_input)
             except (KeyboardInterrupt, EOFError):
                 break
         self._shutdown()
+
+    async def _handle_skill_command(self, user_input: str):
+        """
+        Handle /skill command
+        Usage:
+            /skill                    - List semua skills
+            /skill list               - List semua skills
+            /skill <name>             - Execute skill dengan target default
+            /skill <name> <target>    - Execute skill dengan target spesifik
+        """
+        parts = user_input.split(maxsplit=2)
+        
+        # /skill tanpa argumen atau /skill list
+        if len(parts) == 1 or (len(parts) > 1 and parts[1].lower() == "list"):
+            await self._skill_list()
+            return
+        
+        # /skill <name> [target]
+        skill_name = parts[1].lower() if len(parts) > 1 else None
+        target = parts[2] if len(parts) > 2 else None
+        
+        if not skill_name:
+            console.print("[yellow]⚠ Usage: /skill <name> [target][/yellow]")
+            console.print("  Gunakan /skill list untuk melihat skills tersedia")
+            return
+        
+        skill = self.skill_manager.get_skill(skill_name)
+        if not skill:
+            console.print(f"[bold red]✗ Skill '{skill_name}' not found[/bold red]")
+            console.print("  Gunakan /skill list untuk melihat skills tersedia")
+            return
+        
+        if not target:
+            target = await self._prompt_skill_target(skill)
+            if not target:
+                console.print("[dim]  Skill cancelled.[/dim]")
+                return
+        
+        await self._execute_skill_with_progress(skill_name, target)
+
+    def detect_skill_intent(self, user_input: str) -> Optional[str]:
+        """
+        Detect skill intent dari user input.
+        Hanya trigger jika input berkaitan dengan CODE/PROJECT, bukan general knowledge.
+        """
+        input_lower = user_input.lower()
+
+        # Filter: jangan trigger skill untuk general knowledge questions
+        general_patterns = [
+            "apa itu", "what is", "siapa", "who is", "di mana", "where is",
+            "jelaskan tentang", "explain about", "ceritakan", "tell me about",
+            "apa kabar", "how are you", "hai", "halo", "hello", "hey",
+            "kenapa", "why ", "bagaimana cara", "how to make ",
+            "jelaskan padaku", "jelaskan kepada", "jelaskan indonesia",
+            "jelaskan tentang ", "explain to me",
+        ]
+        if any(p in input_lower for p in general_patterns):
+            return None
+
+        # Filter: trigger hanya kalau ada code context
+        code_context_indicators = [
+            "file", "code", "function", "class", "method", "project",
+            "src/", "test", "src", "script", "module", "package",
+            ".py", ".js", ".ts", ".dart", ".java", ".kt",
+            "this code", "code ini", "file ini", "fungsi ini",
+            "bug", "error", "issue", "fix", "refactor",
+        ]
+        has_code_context = any(ind in input_lower for ind in code_context_indicators)
+
+        for skill_name, triggers in SKILL_TRIGGERS.items():
+            for trigger in triggers:
+                if trigger in input_lower:
+                    if self.skill_manager.get_skill(skill_name):
+                        # explain/review/test butuh code context
+                        if skill_name in ("explain", "review", "test") and not has_code_context:
+                            continue
+                        return skill_name
+
+        return None
+
+    def extract_target_from_input(self, user_input: str) -> Optional[str]:
+        """
+        Extract target (file path) dari user input
+        
+        Examples:
+            "review file ini" -> None (will use current file/context)
+            "review src/orchestrator.py" -> "src/orchestrator.py"
+            "test utils.py" -> "utils.py"
+        """
+        import re
+        
+        # Pattern untuk file path (Python, JS, TS, dll)
+        file_patterns = [
+            r'([\w./-]+\.(py|js|ts|jsx|tsx|go|rs|java|c|cpp|h|hpp))',  # File dengan extension
+            r'([\w./-]+/[\w./-]+)',  # Path dengan slash
+        ]
+        
+        for pattern in file_patterns:
+            matches = re.findall(pattern, user_input)
+            if matches:
+                # Return first match
+                if isinstance(matches[0], tuple):
+                    return matches[0][0]
+                return matches[0]
+        
+        return None
+
+    async def _skill_list(self):
+        """Tampilkan list semua skills"""
+        from rich.table import Table
+        
+        table = Table(title="📚 Available Skills", show_header=True, header_style="bold cyan")
+        table.add_column("Name", style="green", width=15)
+        table.add_column("Category", style="yellow", width=12)
+        table.add_column("Description", style="white")
+        table.add_column("Auto", style="dim", width=6)
+        
+        skills = self.skill_manager.list_skills()
+        for skill_name in sorted(skills):
+            skill = self.skill_manager.get_skill(skill_name)
+            if skill:
+                auto = "✅" if skill.auto_execute else "❌"
+                desc = skill.description[:50] + "..." if len(skill.description) > 50 else skill.description
+                table.add_row(f"/{skill.name}", skill.category, desc, auto)
+        
+        console.print()
+        console.print(table)
+        console.print()
+        console.print("[dim]Usage: /skill <name> [target]  |  /skill list[/dim]")
+
+    async def _prompt_skill_target(self, skill: SkillDefinition) -> Optional[str]:
+        """Prompt user untuk target skill"""
+        if skill.name == "review":
+            return questionary.text("File/directory untuk direview (kosongkan untuk git diff):", default="").ask()
+        elif skill.name == "explain":
+            return questionary.text("File/konsep untuk dijelaskan:").ask()
+        elif skill.name == "test":
+            return questionary.text("File untuk digenerate tests-nya:").ask()
+        elif skill.name == "refactor":
+            return questionary.text("File untuk direfactor:").ask()
+        else:
+            return questionary.text(f"Target untuk skill '{skill.name}':").ask()
+
+    async def _execute_skill_with_progress(self, skill_name: str, target: str):
+        """Execute skill dengan progress indicator"""
+        from rich.progress import Progress, SpinnerColumn, TextColumn
+        
+        skill = self.skill_manager.get_skill(skill_name)
+        console.print()
+        console.print(f"[bold cyan]🚀 Executing skill:[/bold cyan] [green]{skill_name}[/green]")
+        console.print(f"[dim]   Target: {target}[/dim]")
+        console.print()
+        
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console,
+        ) as progress:
+            task = progress.add_task(f"Executing {skill_name}...", total=None)
+            
+            try:
+                result = await self.skill_executor.execute_skill(
+                    skill_name=skill_name,
+                    target=target,
+                    auto_confirm=False
+                )
+                progress.update(task, completed=True)
+                
+                if result.status == SkillStatus.COMPLETED:
+                    console.print()
+                    console.print(Panel(
+                        result.output,
+                        title=f"✅ {skill_name} Complete",
+                        border_style="green",
+                        subtitle=f"⏱️  {result.execution_time:.2f}s"
+                    ))
+                elif result.status == SkillStatus.CANCELLED:
+                    console.print("[yellow]⚠ Skill cancelled by user[/yellow]")
+                else:
+                    console.print(f"[bold red]✗ Skill failed: {result.error}[/bold red]")
+            except Exception as e:
+                progress.update(task, completed=True)
+                console.print(f"[bold red]✗ Error: {e}[/bold red]")
+                logger.error(f"Skill execution error: {e}")
 
     def run_cycle(self, initial_input: str):
         """
@@ -456,7 +689,7 @@ class Orchestrator:
         self.metrics.start_request()
 
         # === FAST PATH: Direct responses ===
-        
+
         # 1. Greeting - langsung response tanpa analysis
         greetings = ["hai", "halo", "hi", "p", "siapa ini", "pagi", "siang", "sore", "malam"]
         if initial_input.lower().strip() in greetings:
@@ -465,8 +698,17 @@ class Orchestrator:
             self.chat_history.append({"role": "Aron", "content": response})
             console.print(self.ui.render_message("Aron", response))
             return response
-        
-        # 2. Simple shell commands - langsung execute tanpa multi-turn
+
+        # 2. SKILL AUTO-DETECT - Check if user wants to use a skill
+        skill_name = self.detect_skill_intent(initial_input)
+        if skill_name:
+            target = self.extract_target_from_input(initial_input)
+            console.print(f"\n[dim]🎯 Auto-detected skill: {skill_name}[/dim]")
+            import asyncio
+            asyncio.run(self._execute_skill_with_progress(skill_name, target or ""))
+            return f"Skill '{skill_name}' executed"
+
+        # 3. Simple shell commands - langsung execute tanpa multi-turn
         simple_patterns = [r"^ls\s", r"^ls$", r"^pwd$", r"^head\s", r"^tail\s", r"^cat\s", r"^grep\s", r"^which\s", r"^echo\s"]
         is_simple_shell = any(re.match(pattern, initial_input.strip()) for pattern in simple_patterns)
         
@@ -544,7 +786,7 @@ class Orchestrator:
                     with Live(console=console, refresh_per_second=4) as live:
                         # Gunakan task_type="coding" untuk presisi maksimal (temp=0.2)
                         for chunk in self.inference.generate_stream(
-                            prompt, task_type="coding",
+                            prompt, task_type=self._detect_task_type(current_input),
                             stop_sequences=["<|im_start|>", "<|im_end|>", "User:", "Assistant:"]
                         ):
                             full_response += chunk
@@ -560,6 +802,9 @@ class Orchestrator:
                                     break
                 finally:
                     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
+
+                # Validate & fix output
+                full_response = self._validate_and_fix_output(full_response, current_input)
 
                 # Proses aksi (shell dan file)
                 action_results = self._process_actions(full_response)
@@ -705,13 +950,101 @@ class Orchestrator:
         # For now, just return a message
         return "Menggunakan analisis standar..."
 
+    def _detect_task_type(self, user_input: str) -> str:
+        """Auto-detect task type untuk set temperature yang sesuai."""
+        text = user_input.lower()
+
+        # Greeting / casual
+        greetings = ["hai", "halo", "hello", "hi", "hey", "apa kabar", "how are", "good morning"]
+        if any(g in text for g in greetings):
+            return "chat"
+
+        # Question / explanation
+        questions = ["jelaskan", "explain", "apa itu", "what is", "bagaimana", "how does", "kenapa", "why"]
+        if any(q in text for q in questions):
+            return "analysis"
+
+        # Planning / architecture
+        planning = ["rencana", "plan", "arsitektur", "architecture", "desain", "design", "struktur", "structure"]
+        if any(p in text for p in planning):
+            return "planning"
+
+        # Shell command generation
+        shell = ["command", "perintah", "run", "jalankan", "execute", "install", "delete", "remove"]
+        if any(s in text for s in shell):
+            return "shell"
+
+        # Default: coding (paling aman untuk task teknis)
+        return "coding"
+
+    def _validate_and_fix_output(self, response: str, user_input: str) -> str:
+        """Validate & self-correct model output."""
+        from src.core.prompt_templates import PromptTemplateManager
+
+        # 1. Sanitize ChatML tokens
+        response = PromptTemplateManager.sanitize_output(response)
+
+        # 2. Detect & fix repetition (looping)
+        lines = response.splitlines()
+        if len(lines) >= 6:
+            last_4 = lines[-4:]
+            if len(set(last_4)) <= 2:  # Jika 4 baris terakhir cuma 2 unique
+                # Potong di sebelum pengulangan
+                for i in range(len(lines) - 3, 0, -1):
+                    if lines[i].strip() == lines[i+1].strip():
+                        response = "\n".join(lines[:i])
+                        break
+
+        # 3. Detect hallucinated file paths
+        # Kalau model bikin file path yang tidak masuk akal
+        import re
+        fake_paths = re.findall(r'/(?:dev|proc|sys|tmp)/\S+', response)
+        for path in fake_paths:
+            response = response.replace(path, f"`{path}` [unverified]")
+
+        # 4. Ensure response is not empty
+        if not response.strip():
+            response = "I don't have enough information to answer that."
+
+        # 5. Trim excessive trailing whitespace
+        response = response.rstrip()
+
+        return response
+
     def _sanitize_history(self) -> List[Dict[str, str]]:
+        """Sanitize & compress chat history within token limits."""
         clean_history = []
         for m in self.chat_history:
-            content = re.sub(r'^(Aron|User|Assistant|\[THOUGHTS\]|\[STRATEGY\]|\[SOLUTION\]|\[RESPONSE\]):\s*', '', m['content'], flags=re.MULTILINE | re.IGNORECASE)
+            content = re.sub(
+                r'^(Aron|User|Assistant|\[THOUGHTS\]|\[STRATEGY\]|\[SOLUTION\]|\[RESPONSE\]):\s*',
+                '', m['content'], flags=re.MULTILINE | re.IGNORECASE
+            )
             if content.strip():
                 clean_history.append({"role": m['role'], "content": content.strip()})
-        return clean_history[-10:]
+
+        # Limit by token count, not just message count
+        # Rough estimate: 1 token ~ 4 chars
+        MAX_TOKENS = 3000
+        MAX_MESSAGES = 10
+
+        # Start from most recent
+        recent = clean_history[-MAX_MESSAGES:]
+
+        # Estimate total tokens
+        total_chars = sum(len(m["content"]) for m in recent)
+        estimated_tokens = total_chars // 4
+
+        # Compress oldest messages if over limit
+        while estimated_tokens > MAX_TOKENS and len(recent) > 2:
+            # Truncate oldest message content
+            oldest = recent[0]
+            max_chars = MAX_TOKENS * 4 // len(recent)
+            if len(oldest["content"]) > max_chars:
+                oldest["content"] = oldest["content"][:max_chars] + "... [truncated]"
+            estimated_tokens = sum(len(m["content"]) for m in recent) // 4
+            recent.pop(0)  # Remove oldest
+
+        return recent
 
     def _build_prompt(self, user_input: str, rag_context: str) -> str:
         history = self._sanitize_history()
