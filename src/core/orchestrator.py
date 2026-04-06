@@ -699,6 +699,41 @@ class Orchestrator:
             console.print(self.ui.render_message("Aron", response))
             return response
 
+        # 1b. Time/Date queries - otomatis jalankan date command
+        time_keywords = [
+            "jam berapa", "hari apa", "waktu sekarang", "tanggal berapa",
+            "what time", "what day", "date today", "what is the date",
+            "jam sekarang", "hari ini", "current time", "current date"
+        ]
+        if any(kw in initial_input.lower() for kw in time_keywords):
+            result = self._run_shell("date")
+            if result.success:
+                # Parse date output dan format jadi jawaban natural
+                raw_date = result.output.strip()
+                # Gunakan model untuk format jawaban yang rapi
+                from datetime import datetime
+                try:
+                    dt = datetime.strptime(raw_date, "%a %b %d %H:%M:%S %Z %Y")
+                    days_id = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
+                    months_id = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                                 "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+                    day_name = days_id[dt.weekday()]
+                    month_name = months_id[dt.month - 1]
+                    response = f"Sekarang **{day_name}, {dt.day} {month_name} {dt.year}**"
+                    response += f"\n\nPukul **{dt.strftime('%H:%M:%S')}** {dt.strftime('%Z')}"
+                    response += "\n\n```bash\n" + raw_date + "\n```"
+                except ValueError:
+                    # Fallback kalau parsing gagal
+                    response = "Waktu sistem saat ini:\n\n```bash\n" + raw_date + "\n```"
+
+                console.print(self.ui.render_message("Aron", response))
+                self.chat_history.append({"role": "User", "content": initial_input})
+                self.chat_history.append({"role": "Aron", "content": response})
+                return response
+            else:
+                console.print(f"[red]Error: {result.error}[/red]")
+                return result.error
+
         # 2. SKILL AUTO-DETECT - Check if user wants to use a skill
         skill_name = self.detect_skill_intent(initial_input)
         if skill_name:
@@ -838,7 +873,16 @@ class Orchestrator:
                     # Tambahkan ke memory sebagai pesan system (agar model tidak bingung)
                     self.memory.add_short_term("system", f"[ENVIRONMENT] Output:\n{output_text}")
                     self.chat_history.append({"role": "system", "content": f"Output:\n{output_text}"})
-                    # Gunakan output sebagai input untuk putaran berikutnya
+
+                    # Untuk command sederhana (date, ls, pwd, dll), stop loop setelah berhasil
+                    simple_cmd_patterns = [r"^date", r"^ls", r"^pwd", r"^echo", r"^head", r"^tail", r"^cat\s", r"^whoami", r"^hostname", r"^open\s", r"^mkdir\s", r"^touch\s", r"^cp\s", r"^mv\s"]
+                    is_simple_cmd = any(re.match(p, executed_commands[0]) for p in simple_cmd_patterns) if executed_commands else False
+
+                    if is_simple_cmd:
+                        # Langsung break untuk command sederhana
+                        break
+
+                    # Gunakan output sebagai input untuk putaran berikutnya (hanya untuk command kompleks)
                     current_input = output_text
                 else:
                     # Jika tidak ada aksi, hentikan siklus
