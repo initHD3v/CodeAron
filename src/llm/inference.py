@@ -23,42 +23,42 @@ class InferenceConfig:
     Task-specific inference configurations.
     Temperature lebih rendah untuk task yang butuh presisi tinggi.
     """
-    # Coding tasks - presisi maksimal
+    # Coding tasks - presisi maksimal, response bisa panjang
     CODING = {
         "temperature": 0.2,
-        "max_tokens": 2000,
+        "max_tokens": 3000,
         "top_p": 0.9,
         "description": "Code generation, modification, and debugging"
     }
-    
-    # Analysis tasks - balanced antara kreativitas dan akurasi
+
+    # Analysis tasks - butuh penjelasan panjang (termasuk matematika)
     ANALYSIS = {
         "temperature": 0.3,
-        "max_tokens": 1500,
+        "max_tokens": 3000,
         "top_p": 0.9,
-        "description": "Project analysis and code review"
+        "description": "Project analysis, code review, and math problems"
     }
-    
+
     # Planning tasks - butuh struktur yang jelas
     PLANNING = {
         "temperature": 0.4,
-        "max_tokens": 1000,
+        "max_tokens": 2000,
         "top_p": 0.9,
         "description": "Task planning and architecture design"
     }
-    
+
     # Chat/General - lebih kreatif untuk conversational
     CHAT = {
         "temperature": 0.7,
-        "max_tokens": 500,
+        "max_tokens": 800,
         "top_p": 0.95,
         "description": "General conversation and greetings"
     }
-    
+
     # Shell commands - deterministik untuk command execution
     SHELL = {
         "temperature": 0.1,
-        "max_tokens": 300,
+        "max_tokens": 500,
         "top_p": 0.85,
         "description": "Shell command generation"
     }

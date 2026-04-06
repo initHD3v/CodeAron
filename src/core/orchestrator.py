@@ -932,7 +932,7 @@ class Orchestrator:
 
             with Live(console=console, refresh_per_second=4) as live:
                 # Gunakan task_type="analysis" untuk balanced accuracy (temp=0.3)
-                for chunk in self.inference.generate_stream(formatted, task_type="analysis", max_tokens=1500):
+                for chunk in self.inference.generate_stream(formatted, task_type="analysis"):
                     full_response += chunk
                     live.update(Panel(full_response, title="📊 Analysis", border_style="cyan"))
             
