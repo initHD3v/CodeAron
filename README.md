@@ -6,7 +6,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/PLATFORM-macOS%20SILICON-000000?style=for-the-badge&logo=apple&logoColor=white" />
   <img src="https://img.shields.io/badge/ENGINE-MLX%20LM-FF4B11?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/VERSION-0.3.0-00FF00?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/VERSION-0.4.0-00FF00?style=for-the-badge" />
   <img src="https://img.shields.io/badge/MODEL-QWEN%2FDEEPSEEK-0052FF?style=for-the-badge&logo=deepseek&logoColor=white" />
 </p>
 
@@ -14,24 +14,27 @@
 
 **CodeAron** adalah asisten pengembang berbasis AI yang berjalan 100% secara lokal. Aron dirancang untuk menjadi **Senior Architect** mandiri yang memiliki integritas data tinggi, tidak pernah berhalusinasi, dan proaktif dalam menganalisis serta memodifikasi kode langsung di mesin Anda.
 
-[Fitur Utama](#-fitur-utama) • [Command](#-command) • [Konfigurasi](#-konfigurasi) • [Instalasi](#-instalasi) • [Arsitektur](#-arsitektur)
+[Fitur Utama](#-fitur-utama) • [Command](#-command) • [Skill System](#-skill-system) • [Konfigurasi](#-konfigurasi) • [Instalasi](#-instalasi) • [Arsitektur](#-arsitektur)
 
 </div>
 
-## 🎯 Apa yang Baru di v0.3.0?
+## 🎯 Apa yang Baru di v0.4.0?
 
 ### ✨ Fitur Baru
-- **🖼️ Vision Engine** - Analisis gambar dengan command `/vision`
-- **⚙️ Project Config** - Konfigurasi per-project via `.codearon/config.yaml`
-- **🛡️ Circuit Breaker** - Auto-stop jika terlalu banyak failure
-- **⏱️ Rate Limiting** - Cooldown antar command untuk stabilitas
-- **🧪 Test Suite** - 22+ unit tests untuk memastikan kualitas
+- **🧠 ChatML Prompt Template** — Format Qwen2.5 yang benar (bukan LLaMA [INST])
+- **🎯 Auto Task Detection** — Otomatis atur temperature (coding/analysis/chat/planning)
+- **🧪 Benchmark Tool** — Test 7 metrik: speed, correctness, RAM, context, multilingual
+- **🔧 Skill System** — Auto-trigger skill: review, explain, test, refactor
+- **📋 Few-Shot Examples** — System prompt dengan contoh format response yang benar
+- **🛡️ Output Validation** — Auto-fix: repetition, hallucination, broken tokens
+- **📚 Context Management** — Token-aware compression, chat panjang tetap stabil
 
 ### 🐛 Bug Fixes
-- Fixed Qdrant lock file issue yang menyebabkan crash
-- Fixed memory leak di orchestrator
-- Fixed prompt template inconsistency untuk multi-model support
-- Improved error handling dengan custom exceptions
+- Fixed tree-sitter parser compatibility (downgrade ke 0.21.3)
+- Fixed skill auto-trigger (tidak trigger untuk general knowledge)
+- Fixed prompt template inconsistency — sekarang pakai ChatML format
+- Fixed output yang mengandung ChatML artifacts
+- Improved error handling dan self-correction
 
 ---
 
@@ -42,10 +45,51 @@ Aron bukan sekadar chatbot. Ia memiliki kepribadian profesional yang menggunakan
 
 ### 🛡️ **Anti-Hallucination Protocol**
 - **Blind Observation:** Aron menyadari ia "tuna netra" tanpa perintah shell. Wajib validasi empiris.
-- **Deterministic Inference:** Temperatur rendah (0.2) untuk akurasi teknis maksimal.
-- **Strict Stop Sequences:** Berhenti seketika setelah perintah untuk mencegah prediksi salah.
+- **Deterministic Inference:** Temperatur otomatis sesuai task (0.1-0.7) untuk akurasi optimal.
+- **Output Validation:** Auto-detect repetition, broken tokens, dan hallucinated paths.
+- **Strict Stop Sequences:** Berhenti seketika setelah prediksi selesai.
 
-### 🔒 **Circuit Breaker & Rate Limiting** (BARU!)
+### 🎯 **Auto Task Detection** (BARU!)
+Aron otomatis detect jenis pertanyaan dan atur temperature:
+
+| Task Type | Temperature | Contoh |
+|-----------|-------------|--------|
+| Coding | 0.2 | "buatkan fungsi sorting" |
+| Analysis | 0.3 | "jelaskan tentang Python" |
+| Planning | 0.4 | "desain arsitektur project" |
+| Chat | 0.7 | "hai", "apa kabar" |
+| Shell | 0.1 | "command untuk install" |
+
+### 📋 **Skill System** (BARU!)
+Aron punya skill yang bisa auto-trigger dari intent:
+
+| Skill | Trigger | Fungsi |
+|-------|---------|--------|
+| `/skill review` | "review", "audit", "cek bug" | Code review mendalam |
+| `/skill explain` | "jelaskan", "apa itu", "how does" | Penjelasan detail |
+| `/skill test` | "test", "unit test", "buatkan test" | Generate test files |
+| `/skill refactor` | "refactor", "optimize", "bersihkan" | Refactor kode |
+
+### 🧪 **Benchmark Tool** (BARU!)
+Test performa Aron dengan command `/benchmark`:
+
+```
+🧪 Starting CodeAron Benchmark...
+
+  CodeAron Benchmark Report
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅ Speed (Code)    30.9 t/s     100%
+  ✅ Speed (Analysis) 41.8 t/s    100%
+  ✅ Correctness     3/3 checks   100%
+  ✅ Context         Yes          90%
+  ✅ RAM             0.6GB        100%
+  ⚠️ Multilingual    20.1 t/s     60%
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Overall Score: 88/100  [Grade: A]
+  Total Time:  34.6s
+```
+
+### 🔒 **Circuit Breaker & Rate Limiting**
 - **Auto-protect:** Jika 5 command gagal berturut-turut, sistem stop otomatis.
 - **Cooldown:** 2 detik antar command untuk mencegah overload.
 - **Smart Recovery:** Counter reset otomatis setelah command berhasil.
@@ -73,22 +117,36 @@ aron chat "Analisa struktur project ini"
 |---------|-----------|
 | `/help` | Tampilkan bantuan |
 | `/clear` | Bersihkan layar & history |
+| `/benchmark` | Jalankan benchmark performa AI (NEW!) |
 | `/hub` | Kelola model AI (Download/List) |
 | `/update` | Update CodeAron ke versi terbaru |
 | `/undo` | Rollback perubahan terakhir |
 | `/checkpoint` | Git commit dengan pesan custom |
-| `/vision [path]` | Analisis gambar (NEW!) |
+| `/skill [name]` | List atau jalankan skill (NEW!) |
+| `/vision [path]` | Analisis gambar |
 | `/quit` | Keluar dari sesi |
 
-### Contoh Penggunaan Vision
+### Contoh Skill Usage
 ```bash
-# Mode interaktif
-/vision
-# > Path ke gambar: /Users/saya/screenshot.png
-# > Pertanyaan: Deskripsikan UI ini
+# List semua skill
+/skill
 
-# Mode inline
-/vision /path/to/screenshot.png
+# Execute skill dengan target
+/skill review src/orchestrator.py
+/skill explain utils.py
+/skill test src/main.py
+
+# Auto-trigger dari chat biasa
+"review file ini"          → auto trigger review skill
+"jelaskan fungsi ini"       → auto trigger explain skill
+"buatkan unit test"         → auto trigger test skill
+```
+
+### Contoh Benchmark
+```bash
+# Di dalam sesi Aron
+/benchmark
+# Akan menjalankan 7 test dan menampilkan report
 ```
 
 ---
@@ -159,16 +217,24 @@ ignored_dirs:
 
 ```text
 CodeAron/
-├── 🧠 src/core/           # Orchestrator, Config, Exceptions
+├── 🧠 src/core/           # Orchestrator, Config, Benchmark
 │   ├── orchestrator.py    # Main controller dengan circuit breaker
-│   ├── config_manager.py  # Project config manager (NEW!)
-│   ├── exceptions.py      # Custom exceptions (NEW!)
-│   └── prompt_templates.py # Unified templates (NEW!)
+│   ├── benchmark.py       # Benchmark suite (7 tests)
+│   ├── skill_manager.py   # Skill definitions
+│   ├── skill_executor.py  # Skill execution engine
+│   ├── config_manager.py  # Project config manager
+│   ├── exceptions.py      # Custom exceptions
+│   └── prompt_templates.py # ChatML templates (NEW!)
 ├── 🤖 src/llm/            # MLX Inference Engine
 ├── 💾 src/memory/         # Vector Store & RAG
 ├── 🛠️ src/tools/          # Tools & Bridges
-│   ├── vision_engine.py   # Vision AI untuk gambar (NEW!)
+│   ├── vision_engine.py   # Vision AI untuk gambar
 │   └── ...
+├── 📋 src/skills/         # Skill Definitions (NEW!)
+│   ├── review.md
+│   ├── explain.md
+│   ├── test.md
+│   └── refactor.md
 └── 🎨 src/ui/             # Modern UI Renderer
 ```
 
@@ -208,33 +274,33 @@ git pull origin main
 pip install -r requirements.txt
 pip install -e .
 
-# Migrasi config (opsional)
-python scripts/migrate_config.py
+# Restart Aron
+aron
 ```
 
 ---
 
-## 🧪 Testing
+## 🧪 Benchmark
 
-```bash
-# Run semua tests
-python -m unittest discover tests/
+CodeAron punya built-in benchmark untuk mengukur performa. Jalankan dengan `/benchmark` di sesi interaktif.
 
-# Run specific test
-python -m unittest tests.test_exceptions -v
+### Test yang Dijalankan
 
-# Run dengan coverage (jika coverage terinstall)
-coverage run -m unittest discover
-coverage report
+| Test | Metrik | Target |
+|------|--------|--------|
+| **Speed (Coding)** | Tokens/sec | ≥ 15 t/s |
+| **Speed (Analysis)** | Tokens/sec | ≥ 15 t/s |
+| **Speed (Chat)** | Tokens/sec | ≥ 15 t/s |
+| **Code Correctness** | 3 checks (def, base, logic) | 3/3 |
+| **Context Memory** | Multi-turn recall | Yes |
+| **RAM Usage** | Model memory footprint | ≤ 4GB |
+| **Multilingual (ID)** | Bahasa Indonesia | ID words ≥ 3 |
+
+### Contoh Output
 ```
-
-### Test Coverage
-- ✅ Exception handling (11 tests)
-- ✅ Configuration management (7 tests)
-- ✅ Inference engine (2 tests)
-- ✅ Memory system (2 tests)
-
-**Total: 22 tests | Status: All Passed ✅**
+  Overall Score: 88/100  [Grade: A]
+  Total Time:  34.6s
+```
 
 ---
 
@@ -258,6 +324,17 @@ aron hub
 # Pilih model dan download
 ```
 
+### Tree-Sitter Parser Error
+```
+✗ dart (skip)
+✗ python (skip)
+...
+```
+**Solusi:** Pastikan versi tree-sitter kompatibel:
+```bash
+pip install tree-sitter==0.21.3 tree-sitter-languages==1.10.2
+```
+
 ### Circuit Breaker Aktif
 Jika muncul "Circuit Breaker: Terlalu banyak kegagalan":
 - Periksa command yang dijalankan
@@ -271,6 +348,7 @@ Jika muncul "Circuit Breaker: Terlalu banyak kegagalan":
 - [Wiki](https://github.com/initHD3v/CodeAron/wiki)
 - [Configuration Guide](https://github.com/initHD3v/CodeAron/wiki/Configuration)
 - [Vision Engine Usage](https://github.com/initHD3v/CodeAron/wiki/Vision)
+- [Skill System](https://github.com/initHD3v/CodeAron/wiki/Skills)
 - [Troubleshooting](https://github.com/initHD3v/CodeAron/wiki/Troubleshooting)
 
 ---
@@ -294,5 +372,5 @@ Filosofi ini menjadi identitas inti CodeAron:
 
 <div align="center">
   <p><i>"Privasi Total, Performa Tanpa Batas."</i></p>
-  <sub><b>v0.3.0</b> | Dibuat dengan ❤️ untuk komunitas Developer Indonesia oleh <b>initHD3v</b></sub>
+  <sub><b>v0.4.0</b> | Dibuat dengan ❤️ untuk komunitas Developer Indonesia oleh <b>initHD3v</b></sub>
 </div>
